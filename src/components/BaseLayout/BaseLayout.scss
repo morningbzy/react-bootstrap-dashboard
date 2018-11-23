@@ -1,0 +1,23 @@
+@import "../../base";
+
+$sidebar-width: 200px;
+$sidebar-bg: darken($dark, 10%);
+
+.nav-pills > li > a {
+  border-radius: 0;
+}
+
+#wrapper {
+  @extend .flex-grow-1;
+  @extend .d-flex;
+  @extend .flex-column;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  &.toggled {
+    #sidebar-wrapper {
+      width: $sidebar-width;
+    }
+  }
+}
