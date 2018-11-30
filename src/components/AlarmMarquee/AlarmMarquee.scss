@@ -1,0 +1,15 @@
+@import "../../base";
+
+#alarm-marquee {
+  background-color: theme-color-level("warning", -4);
+  height: 2rem;
+  line-height: 2rem;
+  ul {
+    list-style: none;
+    padding: 0;
+    li {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+}

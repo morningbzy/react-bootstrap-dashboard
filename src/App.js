@@ -3,6 +3,17 @@ import React, { Component } from 'react';
 import './App.scss';
 import BaseLayout from "./components/BaseLayout/BaseLayout";
 import { BrowserRouter } from "react-router-dom";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faHome, faInfo, faInfoCircle, faCogs, faCog, faTachometerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faCircle, faServer } from "@fortawesome/free-solid-svg-icons";
+import { faNetworkWired } from "@fortawesome/free-solid-svg-icons";
+import { far, faClock } from "@fortawesome/free-regular-svg-icons";
+
+library.add(
+  far,
+  faHome, faInfo, faInfoCircle, faCogs, faCog, faTachometerAlt,
+  faBell, faCircle, faServer, faNetworkWired, faClock,
+);
 
 class App extends Component {
   constructor(props) {
@@ -19,7 +30,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-          <BaseLayout toggled={this.state.toggled} toggleSidebar={this.toggleSidebar}/>
+        <BaseLayout toggled={this.state.toggled} toggleSidebar={this.toggleSidebar}/>
       </BrowserRouter>
     );
   }

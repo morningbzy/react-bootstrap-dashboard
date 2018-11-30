@@ -1,7 +1,7 @@
 @import "~bootstrap/scss/functions";
 //@import "~bootstrap/scss/variables";
 
-$white:    #fff !default;
+$white: #fff !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #e9ecef !default;
 $gray-300: #dee2e6 !default;
@@ -11,19 +11,18 @@ $gray-600: #6c757d !default;
 $gray-700: #495057 !default;
 $gray-800: #343a40 !default;
 $gray-900: #212529 !default;
-$black:    #000 !default;
+$black: #000 !default;
 
-
-$blue:    #007bff !default;
-$indigo:  #6610f2 !default;
-$purple:  #6f42c1 !default;
-$pink:    #e83e8c !default;
-$red:     #dc3545 !default;
-$orange:  #fd7e14 !default;
-$yellow:  #ffc107 !default;
-$green:   #28a745 !default;
-$teal:    #20c997 !default;
-$cyan:    #17a2b8 !default;
+$blue: #007bff !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #e83e8c !default;
+$red: #dc3545 !default;
+$orange: #fd7e14 !default;
+$yellow: #ffc107 !default;
+$green: #28a745 !default;
+$teal: #20c997 !default;
+$cyan: #17a2b8 !default;
 
 $primary: $blue;
 $secondary: $gray-600;
@@ -33,7 +32,31 @@ $warning: $yellow;
 $danger: $red;
 $light: $gray-100;
 $dark: $gray-800;
+$disabled: $gray-500;
+$fatal: $black;
+
+$theme-colors: () !default;
+$theme-colors: map-merge(
+                (
+                        "primary": $primary,
+                        "secondary": $secondary,
+                        "success": $success,
+                        "info": $info,
+                        "warning": $warning,
+                        "danger": $danger,
+                        "light": $light,
+                        "dark": $dark,
+                        "disabled": $disabled,
+                        "fatal": $purple
+                ),
+                $theme-colors
+);
+
+$link-color: $gray-700 !default;
+$link-hover-decoration: none !default;
+$link-hover-color: darken($link-color, 20%) !default;
 
 @import "~bootstrap/scss/bootstrap";
 
-$title-color: adjust_color($color: $primary, $lightness: -20%, $saturation: -10%);
+$title-bg: adjust_color($color: $primary, $lightness: -20%, $saturation: -10%);
+$title-color: $body-bg;

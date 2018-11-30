@@ -1,0 +1,12 @@
+
+.anchor-wrapper{
+  position: relative;
+  visibility: hidden;
+  a.anchor {
+    position: absolute;
+    width: 100px;
+    height: 1px;
+    top: -50px;
+    z-index: 0;
+  }
+}

@@ -1,7 +1,19 @@
 @import "../../base";
 
 #header {
-    height: 40px;
-    background-color: $title-color;
+  height: 40px;
+  background-color: $title-bg;
+  font-size: .8rem !important;
+  $color: $title-color;
+
+  .nav-link {
+    color: darken($color, 15%);
+    &:hover {
+      color: $color;
+    }
+  }
+  .navbar-text {
+    color: $color;
+  }
 }
 

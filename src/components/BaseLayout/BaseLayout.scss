@@ -18,6 +18,7 @@ $sidebar-bg: darken($dark, 10%);
   &.toggled {
     #sidebar-wrapper {
       width: $sidebar-width;
+      flex-shrink: 0;
     }
   }
 }

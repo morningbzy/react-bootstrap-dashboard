@@ -4,12 +4,6 @@ $sidebar-width: 200px;
 $sidebar-bg: darken($dark, 10%);
 $sidebar-indicator-width: .2rem;
 
-#wrapper .toggled {
-  #sidebar-wrapper {
-    width: $sidebar-width;
-  }
-}
-
 #sidebar-wrapper {
   width: 0;
   overflow-y: auto;
@@ -40,13 +34,15 @@ $sidebar-indicator-width: .2rem;
     }
   }
 
+  $indent: 1.5rem;
+
   li {
-    text-indent: 1.5rem;
+    text-indent: $indent;
     line-height: 2.5rem;
     li {
-      text-indent: 3rem;
+      text-indent: $indent * 2;
       li {
-        text-indent: 4.5rem;
+        text-indent: $indent * 3;
       }
     }
   }
@@ -61,15 +57,19 @@ $sidebar-indicator-width: .2rem;
       &:hover {
         color: $navbar-dark-hover-color;
         background-color: rgba($white, 0.1);
-        border-left: darken($title-color, 5%) $sidebar-indicator-width solid;
+        border-left: darken($title-bg, 5%) $sidebar-indicator-width solid;
         //border-left: invert($primary) $sidebar-indicator-width solid;
       }
       &.active {
         color: opacify($navbar-dark-hover-color, 0.05);
         background-color: rgba($white, 0.15);
-        border-left: $title-color $sidebar-indicator-width solid;
+        border-left: $title-bg $sidebar-indicator-width solid;
         //border-left: invert($primary) $sidebar-indicator-width solid;
       }
+    }
+
+    .subscript {
+      color: rgba($sidebar-bg, 0.75);
     }
   }
 }

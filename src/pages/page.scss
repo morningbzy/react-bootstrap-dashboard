@@ -1,0 +1,202 @@
+@import "../base";
+
+@mixin card-state($state, $css, $color) {
+  &.lr-#{$state} {
+    #{$css}: $color;
+  }
+}
+
+@mixin table-row-state($state, $css, $color) {
+  &.lr-#{$state} {
+    > th,
+    > td {
+      &:first-child {
+        #{$css}: $color;
+      }
+    }
+  }
+}
+
+@function px-to-rem($px) {
+  @return $px / 14px * 1rem;
+}
+
+#page-title b {
+  color: $title-bg;
+  font-size: 1.2rem;
+  padding-top: $nav-link-padding-y - .2rem;
+  padding-bottom: $nav-link-padding-y - .2rem;
+  padding-left: $card-spacer-x / 2;
+}
+
+#page-subtitle {
+  margin-left: -1.5rem;
+}
+
+$lr-success: theme-color("success");
+$lr-danger: theme-color("danger");
+$lr-warning: theme-color("warning");
+
+.card.lr-agent-card {
+  min-width: 18rem !important;
+  max-width: 18rem !important;
+  margin-bottom: 1rem !important;
+  border-top-width: 3px;
+  border-top-style: solid;
+  .card-header {
+    @extend .py-1;
+    @extend .px-2;
+  }
+  .card-body {
+    @extend .p-0;
+    font-size: .625rem;
+    .media-body {
+      table {
+        @extend .m-0;
+        table-layout: fixed;
+        td {
+          @extend .border-0;
+          @extend .py-0;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+    p {
+      @extend .m-0;
+    }
+  }
+
+  @each $color, $value in $theme-colors {
+    @include card-state($color, border-top-color, theme-color($color));
+  }
+
+  .card-body {
+    @extend .p-0;
+  }
+}
+
+.lr-alarm-table {
+  font-size: 0.625rem;
+
+  tr {
+    > th,
+    > td {
+      &:first-child {
+        border-left-width: 3px;
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+        border-left-style: solid;
+        border-left-color: $dark;
+
+      }
+    }
+
+    @each $color, $value in $theme-colors {
+      @include table-row-state($color, border-left-color, theme-color($color));
+    }
+  }
+}
+
+.agent-content {
+  @extend .d-flex;
+
+  .main-content {
+    @extend .flex-grow-1;
+    margin-right: $card-spacer-x;
+  }
+
+  .side-content {
+    width: 200px;
+    @extend .flex-shrink-0;
+  }
+
+  .timeline-menu {
+    $timeline-color: $gray-400;
+    $circle-radius: 5px;
+
+    position: fixed;
+    bottom: $card-spacer-y;
+    height: 300px;
+
+    .timeline-bar {
+      position: absolute;
+      top: 0;
+      left: $circle-radius;
+      width: 0;
+      height: 200px;
+      border: 1px solid $timeline-color;
+
+      .circle {
+        position: absolute;
+        left: -$circle-radius;
+        width: 2 * $circle-radius;
+        height: 2 * $circle-radius;
+        border: 2px solid $timeline-color;
+        border-radius: $circle-radius;
+        &.start {
+          top: -2 * $circle-radius;
+        }
+        &.end {
+          bottom: -2 * $circle-radius;
+        }
+      }
+
+    }
+
+    .scroll-spy {
+      margin-top: .5rem;
+      dd {
+        padding-left: 2rem;
+        .anchor-to {
+          cursor: pointer;
+        }
+        em.pointer {
+          position: absolute;
+          left: 1px;
+          width: 2 * $circle-radius;
+          height: 2 * $circle-radius;
+          border: 2px solid #fff;
+          border-radius: $circle-radius;
+          background: $timeline-color;
+          margin-top: $circle-radius;
+        }
+        &:hover {
+          em.pointer {
+            background: $primary;
+          }
+        }
+        &.active {
+          color: $primary;
+          em.pointer {
+            position: absolute;
+            left: 1px;
+            width: 2 * $circle-radius;
+            height: 2 * $circle-radius;
+            border: 0;
+            border-top-left-radius: $circle-radius / 2;
+            border-bottom-left-radius: $circle-radius / 2;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            background: $primary;
+            margin-top: .5rem - px-to-rem(1px);
+            &::after {
+              content: "";
+              border-right: 0;
+              border-top: 5px solid transparent;
+              border-bottom: 5px solid transparent;
+              border-left: 5px solid $primary;
+              width: 0;
+              height: 0;
+              display: inline-block;
+              position: absolute;
+              right: -5px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
