@@ -4,14 +4,24 @@ import './App.scss';
 import BaseLayout from "./components/BaseLayout/BaseLayout";
 import { BrowserRouter } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faHome, faInfo, faInfoCircle, faCogs, faCog, faTachometerAlt } from '@fortawesome/free-solid-svg-icons';
+import {
+  faHome,
+  faInfo,
+  faInfoCircle,
+  faCogs,
+  faCog,
+  faTachometerAlt,
+  faTrash,
+  faPen
+} from '@fortawesome/free-solid-svg-icons';
 import { faBell, faCircle, faServer } from "@fortawesome/free-solid-svg-icons";
 import { faNetworkWired } from "@fortawesome/free-solid-svg-icons";
 import { far, faClock } from "@fortawesome/free-regular-svg-icons";
+import $ from 'jquery';
 
 library.add(
   far,
-  faHome, faInfo, faInfoCircle, faCogs, faCog, faTachometerAlt,
+  faHome, faInfo, faInfoCircle, faCogs, faCog, faTachometerAlt, faTrash, faPen,
   faBell, faCircle, faServer, faNetworkWired, faClock,
 );
 
@@ -24,7 +34,8 @@ class App extends Component {
   }
 
   toggleSidebar = () => {
-    this.setState({toggled: !this.state.toggled});
+    $('body').toggleClass('sidebar-collapsed');
+    // this.setState({toggled: !this.state.toggled});
   };
 
   render() {

@@ -21,6 +21,25 @@
   @return $px / 14px * 1rem;
 }
 
+table {
+  font-size: .8rem;
+  td, th {
+    vertical-align: middle !important;
+  }
+  &.table-sm .btn-sm {
+    padding: .1rem .5rem;
+  }
+}
+
+.modal button.close:focus {
+  outline: none;
+}
+
+.modal-header b {
+  color: $title-bg;
+  font-size: 1.2rem;
+}
+
 #page-title b {
   color: $title-bg;
   font-size: 1.2rem;
@@ -49,7 +68,7 @@ $lr-warning: theme-color("warning");
   }
   .card-body {
     @extend .p-0;
-    font-size: .625rem;
+    font-size: .8rem;
     .media-body {
       table {
         @extend .m-0;
@@ -78,7 +97,7 @@ $lr-warning: theme-color("warning");
 }
 
 .lr-alarm-table {
-  font-size: 0.625rem;
+  font-size: .8rem;
 
   tr {
     > th,
@@ -200,3 +219,68 @@ $lr-warning: theme-color("warning");
   }
 }
 
+.rdt {
+  input[type="text"].form-control {
+    @extend .form-control-sm;
+  }
+
+  .rdtPicker {
+    width: 14rem;
+    @include reset-text();
+    font-size: $popover-font-size;
+    background-color: $popover-bg;
+    background-clip: padding-box;
+    border: $popover-border-width solid $popover-border-color;
+    @include border-radius($popover-border-radius);
+    @include box-shadow($popover-box-shadow);
+
+    td, th {
+      font-size: .75rem;
+      height: unset;
+      padding: 3px 0;
+    }
+
+    .rdtPrev span, .rdtNext span {
+      margin-top: -.25rem;
+    }
+
+    td.rdtDay,
+    td.rdtHour,
+    td.rdtMinute,
+    td.rdtSecond,
+    .rdtTimeToggle,
+    thead tr:first-child th {
+      &:hover {
+        background-color: $pagination-hover-bg;
+      }
+    }
+
+    td.rdtActive {
+      &, &:hover {
+        background-color: $primary;
+      }
+    }
+
+    td.rdtToday:before {
+      border-bottom: 7px solid $primary;
+    }
+  }
+}
+
+.react-bootstrap-daterangepicker-container {
+  width: 100%;
+}
+
+.badge.perm {
+  @extend .bg-white;
+  cursor: default;
+  border: 1px solid;
+  &.badge-danger {
+    @extend .text-danger;
+    border-color: $danger;
+  }
+  &.badge-dark {
+    @extend .text-dark;
+    border-color: $dark;
+  }
+}

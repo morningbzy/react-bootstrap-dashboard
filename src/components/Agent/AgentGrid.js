@@ -3,31 +3,27 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import { Card, CardDeck, Media, Table } from 'react-bootstrap';
 import { genImg } from '../../utils';
+import { STATES } from "../../common/constants";
 
 class AgentGrid extends Component {
   constructor(props) {
     super(props);
     this.state = {data: []};
+  }
 
+  componentDidMount() {
     let url = 'http://localhost:8080/rest-api/agents/all';
     axios.get(url)
       .then((resp) => {
         this.setState({data: resp.data})
       });
-
-  }
-
-  randomState() {
-    const states = ['success', 'warning', 'danger', 'fatal'];
-    let r = parseInt(Math.random() * 4);
-    return states[r];
   }
 
   render() {
     return (
       <CardDeck>
         {this.state.data.map(agent => (
-          <Card key={agent.id} className={"lr-agent-card lr-" + this.randomState()}>
+          <Card key={agent.id} className={"lr-agent-card lr-" + STATES[agent.state]}>
             <Card.Header as="b">
               <Link to={"/agent/" + agent.ip}>{agent.ip}</Link>
             </Card.Header>

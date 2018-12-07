@@ -3,11 +3,10 @@ import { Card, Nav } from 'react-bootstrap';
 
 import './page.scss';
 import AlarmMarquee from "../components/AlarmMarquee/AlarmMarquee";
-import AgentGrid from "../components/Agent/AgentGrid";
 import AlarmTable from "../components/Alarm/AlarmTable";
 
 
-class Home extends Component {
+class Alarm extends Component {
   constructor(props) {
     super(props);
     this.state = {data: [], alarm: [],};
@@ -27,7 +26,6 @@ class Home extends Component {
             </Nav>
           </Card.Header>
           <Card.Body>
-            <AgentGrid/>
             <AlarmTable/>
           </Card.Body>
         </Card>
@@ -36,4 +34,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Alarm;

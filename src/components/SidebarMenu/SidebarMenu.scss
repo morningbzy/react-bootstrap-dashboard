@@ -1,17 +1,15 @@
 @import "../../base";
 
 $sidebar-width: 200px;
-$sidebar-bg: darken($dark, 10%);
+$sidebar-bg: darken($dark, 5%);
 $sidebar-indicator-width: .2rem;
 
 #sidebar-wrapper {
-  width: 0;
+  width: $sidebar-width;
+  flex-shrink: 0;
   overflow-y: auto;
   background-color: $sidebar-bg;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  @include transition(all 0.3s cubic-bezier(.645, .045, .355, 1));
 }
 
 .sidebar-nav {
@@ -19,8 +17,14 @@ $sidebar-indicator-width: .2rem;
   margin: 0;
   padding: 0;
   list-style-type: none;
+
   ul {
     padding-left: 0;
+  }
+
+  .subscript {
+    color: rgba($sidebar-bg, 0.75);
+    @include transition(all 0.3s cubic-bezier(.645, .045, .355, 1));
   }
 
   li:not(.leaf) {
@@ -46,7 +50,12 @@ $sidebar-indicator-width: .2rem;
       }
     }
   }
+
   li {
+    ul {
+      background-color: rgba(0,0,0,.75);
+    }
+
     span, a {
       font-size: $font-size-sm;
       display: block;
@@ -54,22 +63,24 @@ $sidebar-indicator-width: .2rem;
       color: $navbar-dark-color;
       border-left: transparent $sidebar-indicator-width solid;
       cursor: pointer;
+
+      @include transition(all 0.3s cubic-bezier(.645, .045, .355, 1));
+
       &:hover {
         color: $navbar-dark-hover-color;
-        background-color: rgba($white, 0.1);
+        //color: rgba($navbar-dark-hover-color, .9);
         border-left: darken($title-bg, 5%) $sidebar-indicator-width solid;
-        //border-left: invert($primary) $sidebar-indicator-width solid;
       }
       &.active {
-        color: opacify($navbar-dark-hover-color, 0.05);
-        background-color: rgba($white, 0.15);
-        border-left: $title-bg $sidebar-indicator-width solid;
-        //border-left: invert($primary) $sidebar-indicator-width solid;
+        color: color-yiq($primary);
+        //color: $navbar-dark-active-color;
+        //color: rgba($navbar-dark-hover-color, .9);
+        background-color: $primary;
+        border-left: $primary $sidebar-indicator-width solid;
+        .subscript {
+          color: rgba($primary, 0.6);
+        }
       }
-    }
-
-    .subscript {
-      color: rgba($sidebar-bg, 0.75);
     }
   }
 }

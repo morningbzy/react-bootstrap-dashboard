@@ -39,7 +39,7 @@ class SidebarMenu extends Component {
           icon: 'bell',
           subMenu: [
             {title: '报警', path: '/alarmmgr/current', icon: 'bell'},
-            {title: '历史报警', path: '/alarmmgr/history', icon: 'bell', subscript: ['far', 'clock']}
+            {title: '历史报警', path: '/alarmmgr/history', icon: 'bell', subscript: ['far', 'clock']},
           ],
         },
         {
@@ -48,7 +48,8 @@ class SidebarMenu extends Component {
           icon: 'cogs',
           subMenu: [
             {title: '用户管理', path: '/sysmgr/user', icon: 'cog'},
-            {title: '权限管理', path: '/sysmgr/perm', icon: 'cog'}
+            {title: '角色管理', path: '/sysmgr/role', icon: 'cog'},
+            {title: '权限管理', path: '/sysmgr/perm', icon: 'cog'},
           ],
         },
         {
@@ -105,7 +106,7 @@ class SidebarMenu extends Component {
   toggleExpend = (e) => {
     let li = $(e.currentTarget).parents('li');
     li.toggleClass('expended');
-    $('ul', li).slideToggle();
+    $('ul', li).slideToggle(250);
   };
 
   render() {
