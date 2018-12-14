@@ -1,4 +1,6 @@
 @import "../../base";
+@import "~bootstrap/scss/mixins/transition";
+@import "~bootstrap/scss/mixins/caret";
 
 $sidebar-width: 200px;
 $sidebar-bg: darken($dark, 5%);

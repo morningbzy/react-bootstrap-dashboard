@@ -1,4 +1,5 @@
 @import "../../base";
+@import "~bootstrap/scss/mixins/transition";
 
 $sidebar-width: 200px;
 $sidebar-bg: darken($dark, 10%);
@@ -8,13 +9,10 @@ $sidebar-bg: darken($dark, 10%);
 }
 
 #wrapper {
-  @extend .flex-grow-1;
-  @extend .d-flex;
-  @extend .flex-column;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  @include transition(all 0.3s ease);
 }
 
 .sidebar-collapsed {

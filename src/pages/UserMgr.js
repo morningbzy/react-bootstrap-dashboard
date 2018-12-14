@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Card, Nav, Pagination, Table, ButtonGroup, Button, Modal, Form, Row, Col, Badge } from 'react-bootstrap';
 import { STATES } from "../common/constants";
 
-import './page.scss';
 import AlarmMarquee from "../components/AlarmMarquee/AlarmMarquee";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

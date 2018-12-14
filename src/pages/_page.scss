@@ -8,8 +8,8 @@
 
 @mixin table-row-state($state, $css, $color) {
   &.lr-#{$state} {
-    > th,
-    > td {
+    th,
+    td {
       &:first-child {
         #{$css}: $color;
       }
@@ -100,21 +100,20 @@ $lr-warning: theme-color("warning");
   font-size: .8rem;
 
   tr {
-    > th,
-    > td {
+    th,
+    td {
       &:first-child {
-        border-left-width: 3px;
-        border-top-left-radius: 3px;
-        border-bottom-left-radius: 3px;
+        border-left-width: 0;
         border-left-style: solid;
-        border-left-color: $dark;
-
+        border-left-color: transparent;
       }
     }
 
-    @each $color, $value in $theme-colors {
-      @include table-row-state($color, border-left-color, theme-color($color));
-    }
+    //&:hover {
+    //  @each $state, $color in $theme-colors {
+    //    @include table-row-state($state, border-left-color, $color);
+    //  }
+    //}
   }
 }
 
@@ -176,7 +175,7 @@ $lr-warning: theme-color("warning");
           left: 1px;
           width: 2 * $circle-radius;
           height: 2 * $circle-radius;
-          border: 2px solid #fff;
+          border: 2px solid #ffffff;
           border-radius: $circle-radius;
           background: $timeline-color;
           margin-top: $circle-radius;

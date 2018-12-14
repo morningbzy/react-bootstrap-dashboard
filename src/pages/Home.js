@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Nav } from 'react-bootstrap';
 
-import './page.scss';
 import AlarmMarquee from "../components/AlarmMarquee/AlarmMarquee";
 import AgentGrid from "../components/Agent/AgentGrid";
 import AlarmTable from "../components/Alarm/AlarmTable";

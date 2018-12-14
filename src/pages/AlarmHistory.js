@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Card, Form, Nav, Button, Row, Col, Overlay, Tooltip, Popover } from 'react-bootstrap';
 import DateRangePicker from 'react-bootstrap-daterangepicker';
 
-import './page.scss';
 import * as yup from 'yup';
 import AlarmMarquee from "../components/AlarmMarquee/AlarmMarquee";
 import AlarmTable from "../components/Alarm/AlarmTable";

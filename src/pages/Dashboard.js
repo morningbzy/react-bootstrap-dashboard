@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Nav, NavDropdown } from 'react-bootstrap';
 
-import './page.scss';
 import AlarmMarquee from "../components/AlarmMarquee/AlarmMarquee";
 
 class Dashboard extends Component {
