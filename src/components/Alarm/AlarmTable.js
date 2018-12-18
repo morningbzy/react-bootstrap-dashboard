@@ -1,23 +1,31 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Pagination, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { STATES } from "../../common/constants";
+import Pagination from "../Pagination/Pagination";
 
-class AgentGrid extends Component {
+class AlarmTable extends Component {
   constructor(props) {
     super(props);
-    this.state = {data: []};
+    this.state = {data: {list: []}};
   }
 
   componentDidMount() {
-    let url = 'http://localhost:8080/rest-api/alarms/all';
-    axios.get(url)
-      .then((resp) => {
-        this.setState({data: resp.data})
-      });
+    this.paginate();
   }
 
+  paginate = (page) => {
+    let url = 'http://localhost:8080/rest-api/alarms/all';
+    let param = 'pageSize=20&';
+    param += page === undefined ? '' : 'page=' + page;
+    axios.get(url + '?' + param)
+      .then((resp) => {
+        this.setState({data: resp.data.data});
+      });
+  };
+
   render() {
+    const {data} = this.state;
     return (
       <>
         <Table hover size="sm" className="lr-alarm-table">
@@ -31,7 +39,7 @@ class AgentGrid extends Component {
           </tr>
           </thead>
           <tbody>
-          {this.state.data.map(alarm => {
+          {data.list.map(alarm => {
             const state = STATES[alarm.state];
             return (
               <tr key={alarm.id} className={"table-" + state + " lr-" + state}>
@@ -45,24 +53,10 @@ class AgentGrid extends Component {
           })}
           </tbody>
         </Table>
-        <Pagination size="sm">
-          <Pagination.First/>
-          <Pagination.Prev/>
-          <Pagination.Item>{1}</Pagination.Item>
-          <Pagination.Ellipsis/>
-          <Pagination.Item>{10}</Pagination.Item>
-          <Pagination.Item>{11}</Pagination.Item>
-          <Pagination.Item active>{12}</Pagination.Item>
-          <Pagination.Item>{13}</Pagination.Item>
-          <Pagination.Item>{14}</Pagination.Item>
-          <Pagination.Ellipsis/>
-          <Pagination.Item>{20}</Pagination.Item>
-          <Pagination.Next/>
-          <Pagination.Last/>
-        </Pagination>
+        <Pagination size="sm" data={data} handlePaginate={this.paginate}/>
       </>
     );
   }
 }
 
-export default AgentGrid;
+export default AlarmTable;
