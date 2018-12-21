@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import { Card, CardDeck, Media, Table } from 'react-bootstrap';
 import { genImg } from '../../utils';
-import { STATES } from "../../common/constants";
+import { STATES, API_BASE_URL } from "../../common/constants";
 import Pagination from "../Pagination/Pagination";
 
 class AgentGrid extends Component {
@@ -17,7 +17,7 @@ class AgentGrid extends Component {
   }
 
   paginate = (page) => {
-    let url = 'http://localhost:8080/rest-api/agents/all';
+    let url = `${API_BASE_URL}/rest-api/agents/all`;
     let param = 'pageSize=6&';
     param += page === undefined ? '' : 'page=' + page;
     axios.get(url + '?' + param)

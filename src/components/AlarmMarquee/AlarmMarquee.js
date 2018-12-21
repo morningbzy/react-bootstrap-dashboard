@@ -4,7 +4,7 @@ import './AlarmMarquee.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import Marquee from "./Marquee";
-import { STATES, STATE_ICONS } from "../../common/constants";
+import { STATES, STATE_ICONS, API_BASE_URL } from "../../common/constants";
 
 class AlarmMarquee extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class AlarmMarquee extends Component {
   }
 
   get = () => {
-    let url = 'http://localhost:8080/rest-api/alarms/all?pageSize=5';
+    let url = `${API_BASE_URL}/rest-api/alarms/all?pageSize=5`;
     url += '&page=' + parseInt(Math.random() * 6 + 1);
     axios.get(url)
       .then((resp) => {

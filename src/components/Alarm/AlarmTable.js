@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Table } from 'react-bootstrap';
-import { STATES } from "../../common/constants";
+import { STATES, API_BASE_URL  } from "../../common/constants";
 import Pagination from "../Pagination/Pagination";
 
 class AlarmTable extends Component {
@@ -15,7 +15,7 @@ class AlarmTable extends Component {
   }
 
   paginate = (page) => {
-    let url = 'http://localhost:8080/rest-api/alarms/all';
+    let url = `${API_BASE_URL}/rest-api/alarms/all`;
     let param = 'pageSize=20&';
     param += page === undefined ? '' : 'page=' + page;
     axios.get(url + '?' + param)

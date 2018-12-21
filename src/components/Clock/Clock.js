@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import axios from "axios";
+import { API_BASE_URL } from "../../common/constants";
 
 class Clock extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class Clock extends Component {
   }
 
   update = () => {
-    let url = 'http://localhost:8080/rest-api/datetime';
+    let url = `${API_BASE_URL}/rest-api/datetime`;
     axios.get(url)
       .then((resp) => {
         this.setState({datetime: moment(resp.data)})
