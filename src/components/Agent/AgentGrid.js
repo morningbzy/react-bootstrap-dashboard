@@ -18,7 +18,7 @@ class AgentGrid extends Component {
 
   paginate = (page) => {
     let url = 'http://localhost:8080/rest-api/agents/all';
-    let param = 'pageSize=12&';
+    let param = 'pageSize=6&';
     param += page === undefined ? '' : 'page=' + page;
     axios.get(url + '?' + param)
       .then((resp) => {

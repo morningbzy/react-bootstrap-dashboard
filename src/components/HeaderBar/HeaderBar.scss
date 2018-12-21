@@ -1,4 +1,5 @@
 @import "../../base";
+@import "~bootstrap/scss/mixins/transition";
 
 #header {
   height: 40px;
@@ -17,3 +18,20 @@
   }
 }
 
+#alarm-marquee-wrapper {
+  display: flex;
+  height: 0;
+  z-index: 1000;
+}
+
+.alarm-marquee-left {
+  width: 200px;
+  flex-shrink: 0;
+  @include transition(all 0.3s cubic-bezier(.645, .045, .355, 1));
+}
+
+.sidebar-collapsed {
+  .alarm-marquee-left {
+    width: 0;
+  }
+}

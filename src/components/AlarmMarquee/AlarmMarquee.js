@@ -2,32 +2,67 @@ import React, { Component } from 'react';
 
 import './AlarmMarquee.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfoCircle, faTimesCircle, faExclamationTriangle, faSkull } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import Marquee from "./Marquee";
+import { STATES, STATE_ICONS } from "../../common/constants";
 
 class AlarmMarquee extends Component {
   constructor(props) {
     super(props);
-    this.state = {data: []};
+    this.state = {
+      data: {
+        lists: [],
+      },
+      listCandidate: [],
+    };
+  }
 
-    let url = 'http://localhost:8080/rest-api/accounts/all';
+  componentDidMount() {
+    this.get();
+    this.pool(5000);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timer);
+  }
+
+  get = () => {
+    let url = 'http://localhost:8080/rest-api/alarms/all?pageSize=5';
+    url += '&page=' + parseInt(Math.random() * 6 + 1);
     axios.get(url)
       .then((resp) => {
-        this.setState({data: resp.data})
+        let {data} = this.state;
+        const newList = resp.data.data.list;
+
+        if (data.lists.length < 2) {
+          data.lists.push(newList);
+          this.setState({data: data})
+        } else {
+          this.setState({listCandidate: newList});
+        }
       });
+  };
+
+  pool(timeout) {
+    this.timer = setInterval(this.get, timeout);
   }
 
   render() {
+    const {data} = this.state;
     return (
-      <Marquee id="alarm-marquee" fps="30">
-        <ul className="d-flex">
-          {this.state.data.map(i => (<li key={i.id}><FontAwesomeIcon icon={faInfoCircle} className="text-success" fixedWidth/> {i.name}</li>))}
-          <li><FontAwesomeIcon icon={faInfoCircle} className="text-success" fixedWidth/> bbb</li>
-          <li><FontAwesomeIcon icon={faTimesCircle} className="text-danger" fixedWidth/> aaa</li>
-          <li><FontAwesomeIcon icon={faExclamationTriangle} fixedWidth/> bbb</li>
-          <li><FontAwesomeIcon icon={faSkull} className="text-dark" fixedWidth/> bbb</li>
-        </ul>
+      <Marquee id="alarm-marquee" className="alarm-marquee" fps="50" pps="100" ref={this.marqueeRef}>
+        {data.lists.map(list => (
+          <ul key={Math.random()} className="d-flex">
+            {list.map(i =>
+              <li key={i.id} className={`lr-${STATES[i.state]}`}>
+                <FontAwesomeIcon icon={STATE_ICONS[STATES[i.state]]}
+                                 className={`text-${STATES[i.state]} lr-${STATES[i.state]}`}
+                                 fixedWidth/>
+                <span>{i.ip} {i.datetime} {i.sysName} {i.desc}</span>
+              </li>
+            )}
+          </ul>
+        ))}
       </Marquee>
     );
   }

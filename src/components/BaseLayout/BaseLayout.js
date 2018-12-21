@@ -4,7 +4,7 @@ import { Container, Row } from 'react-bootstrap';
 import './BaseLayout.scss';
 import SidebarMenu from "../SidebarMenu/SidebarMenu";
 import HeaderBar from "../HeaderBar/HeaderBar";
-import { Home, Dashboard, Agent, AgentSpec, Alarm, AlarmHistory, UserMgr, RoleMgr, PermMgr} from "../../pages";
+import { Home, Dashboard, Agent, AgentSpec, Alarm, AlarmHistory, UserMgr, RoleMgr, PermMgr } from "../../pages";
 import { Route } from "react-router-dom";
 
 class BaseLayout extends Component {
@@ -24,17 +24,16 @@ class BaseLayout extends Component {
             <Route path="/agent" exact
                    component={(props) => (<Agent title="Agent" {...props}/>)}/>
             <Route path="/alarmmgr/current" exact
-                   component={(props) => (<Alarm title="Alarm" {...props}/>)}/>
+                   component={(props) => (<Alarm title="Alarms" {...props}/>)}/>
             <Route path="/alarmmgr/history" exact
-                   component={(props) => (<AlarmHistory title="Alarm History" {...props}/>)}/>
+                   component={(props) => (<AlarmHistory title="Alarms" {...props}/>)}/>
             <Route path="/sysmgr/user" exact
-                   component={(props) => (<UserMgr title="User Management" {...props}/>)}/>
+                   component={(props) => (<UserMgr title="System Management" {...props}/>)}/>
             <Route path="/sysmgr/role" exact
-                   component={(props) => (<RoleMgr title="Role Management" {...props}/>)}/>
+                   component={(props) => (<RoleMgr title="System Management" {...props}/>)}/>
             <Route path="/sysmgr/perm" exact
-                   component={(props) => (<PermMgr title="Permission Management" {...props}/>)}/>
-            <div id="rightbar-wrapper">
-            </div>
+                   component={(props) => (<PermMgr title="System Management" {...props}/>)}/>
+            <div id="rightbar-wrapper"></div>
           </Row>
         </Container>
       </>

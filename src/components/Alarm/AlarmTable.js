@@ -42,7 +42,7 @@ class AlarmTable extends Component {
           {data.list.map(alarm => {
             const state = STATES[alarm.state];
             return (
-              <tr key={alarm.id} className={"table-" + state + " lr-" + state}>
+              <tr key={alarm.id} className={`-table-${state} lr-${state}`}>
                 <td>{alarm.id}</td>
                 <td>{alarm.ip}</td>
                 <td>{alarm.sysName}</td>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Nav } from 'react-bootstrap';
 
-import AlarmMarquee from "../components/AlarmMarquee/AlarmMarquee";
 import ScrollSpy from "../components/ScrollSpy";
 
 class Agent extends Component {
@@ -9,9 +8,8 @@ class Agent extends Component {
     const {match} = this.props;
     return (
       <div id="container-wrapper" className="flex-grow-1">
-        <AlarmMarquee/>
         <Card className="border-0">
-          <Card.Header className="bg-white">
+          <Card.Header className="container-header">
             <Nav variant="tabs">
               <Nav.Item as="span" id="page-title">
                 <Nav.Link as="b" disabled>{this.props.title}</Nav.Link>

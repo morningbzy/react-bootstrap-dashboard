@@ -1,5 +1,4 @@
 @import "~bootstrap/scss/functions";
-//@import "~bootstrap/scss/variables";
 
 $white: #ffffff !default;
 $gray-100: #f8f9fa !default;
@@ -56,8 +55,5 @@ $link-color: $gray-700 !default;
 $link-hover-decoration: none !default;
 $link-hover-color: darken($link-color, 20%) !default;
 
-//@import "~bootstrap/scss/bootstrap";
 @import "~bootstrap/scss/variables";
-
-$title-bg: adjust_color($color: $primary, $lightness: -20%, $saturation: -10%);
-$title-color: color-yiq($title-bg);
+@import "scss/variables";

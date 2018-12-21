@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Card, Nav, Pagination, Table, ButtonGroup, Button, Modal, Form, Row, Col, Badge } from 'react-bootstrap';
-import { STATES } from "../common/constants";
 
-import AlarmMarquee from "../components/AlarmMarquee/AlarmMarquee";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { LinkContainer } from "react-router-bootstrap";
 
 
 class UserMgr extends Component {
@@ -74,12 +73,26 @@ class UserMgr extends Component {
     return (
       <>
         <div id="container-wrapper" className="flex-grow-1">
-          <AlarmMarquee/>
           <Card className="border-0">
-            <Card.Header className="bg-white">
+            <Card.Header className="container-header">
               <Nav variant="tabs" defaultActiveKey="#first">
                 <Nav.Item as="span" id="page-title">
                   <Nav.Link as="b" disabled>{this.props.title}</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <LinkContainer to={"/sysmgr/user"} exact>
+                    <Nav.Link>User</Nav.Link>
+                  </LinkContainer>
+                </Nav.Item>
+                <Nav.Item>
+                  <LinkContainer to={"/sysmgr/role"} exact>
+                    <Nav.Link>Role</Nav.Link>
+                  </LinkContainer>
+                </Nav.Item>
+                <Nav.Item>
+                  <LinkContainer to={"/sysmgr/perm"} exact>
+                    <Nav.Link>Permission</Nav.Link>
+                  </LinkContainer>
                 </Nav.Item>
               </Nav>
             </Card.Header>
@@ -99,7 +112,6 @@ class UserMgr extends Component {
                 </thead>
                 <tbody>
                 {this.state.data.map(alarm => {
-                  const state = STATES[alarm.state];
                   return (
                     <tr key={alarm.id}>
                       <td>{alarm.id}</td>

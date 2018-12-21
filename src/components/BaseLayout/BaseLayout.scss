@@ -12,11 +12,16 @@ $sidebar-bg: darken($dark, 10%);
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  @include transition(all 0.3s ease);
+  //@include transition(all 0.3s ease);
 }
 
 .sidebar-collapsed {
   #sidebar-wrapper {
     width: 0;
   }
+}
+
+#container-wrapper {
+  overflow-x: hidden;
+  padding-top: $lr-alarm-marquee-height;
 }

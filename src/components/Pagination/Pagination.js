@@ -3,9 +3,6 @@ import { Pagination } from 'react-bootstrap';
 
 
 export default class extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const {First, Prev, Ellipsis, Next, Last, Item} = Pagination;

@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { Card, Form, Nav, Button, Row, Col, Overlay, Tooltip, Popover } from 'react-bootstrap';
+import { Card, Form, Nav, Button, Row, Col, Overlay } from 'react-bootstrap';
 import DateRangePicker from 'react-bootstrap-daterangepicker';
 
 import * as yup from 'yup';
-import AlarmMarquee from "../components/AlarmMarquee/AlarmMarquee";
 import AlarmTable from "../components/Alarm/AlarmTable";
 import { Form as FormikForm, Formik } from "formik";
-import DateTime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
 import 'bootstrap-daterangepicker/daterangepicker.css';
+import { LinkContainer } from "react-router-bootstrap";
 
 
 class AlarmHistory extends Component {
@@ -32,12 +31,21 @@ class AlarmHistory extends Component {
 
     return (
       <div id="container-wrapper" className="flex-grow-1">
-        <AlarmMarquee/>
         <Card className="border-0">
-          <Card.Header className="bg-white">
+          <Card.Header className="container-header">
             <Nav variant="tabs" defaultActiveKey="#first">
               <Nav.Item as="span" id="page-title">
                 <Nav.Link as="b" disabled>{this.props.title}</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <LinkContainer to={"/alarmmgr/current"} exact>
+                  <Nav.Link>All</Nav.Link>
+                </LinkContainer>
+              </Nav.Item>
+              <Nav.Item>
+                <LinkContainer to={"/alarmmgr/history"} exact>
+                  <Nav.Link>History</Nav.Link>
+                </LinkContainer>
               </Nav.Item>
             </Nav>
           </Card.Header>
@@ -54,11 +62,11 @@ class AlarmHistory extends Component {
               render={(props) => {
                 const {
                   values,
-                  touched,
+                  // touched,
                   errors,
                   handleChange,
-                  handleBlur,
-                  handleSubmit,
+                  // handleBlur,
+                  // handleSubmit,
                 } = props;
                 return (
                   <FormikForm>

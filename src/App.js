@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-
-import './App.scss';
 import BaseLayout from "./components/BaseLayout/BaseLayout";
 import { BrowserRouter } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -12,18 +10,35 @@ import {
   faCog,
   faTachometerAlt,
   faTrash,
-  faPen
+  faPen,
+  faBell,
+  faCircle,
+  faServer,
+  faSync,
+  faRedo,
+  faTimesCircle,
+  faExclamationTriangle,
+  faSkull,
+  faNetworkWired,
 } from '@fortawesome/free-solid-svg-icons';
-import { faBell, faCircle, faServer } from "@fortawesome/free-solid-svg-icons";
-import { faNetworkWired } from "@fortawesome/free-solid-svg-icons";
-import { far, faClock } from "@fortawesome/free-regular-svg-icons";
+
+
+import {
+  far,
+  faClock
+} from "@fortawesome/free-regular-svg-icons";
+
+import './App.scss';
 import $ from 'jquery';
 
 library.add(
-  far,
-  faHome, faInfo, faInfoCircle, faCogs, faCog, faTachometerAlt, faTrash, faPen,
-  faBell, faCircle, faServer, faNetworkWired, faClock,
+  // regular
+  far, faClock,
+  // solid
+  faHome, faInfo, faInfoCircle, faCogs, faCog, faTachometerAlt, faTrash, faPen, faBell, faCircle, faServer,
+  faNetworkWired, faTimesCircle, faExclamationTriangle, faSkull, faSync, faRedo,
 );
+
 
 class App extends Component {
   constructor(props) {

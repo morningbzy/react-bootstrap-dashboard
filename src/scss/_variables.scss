@@ -1,0 +1,10 @@
+$title-bg: adjust_color($color: $primary, $lightness: -20%, $saturation: -10%);
+$title-color: color-yiq($title-bg);
+
+$nav-link-padding-y: .25rem;
+
+//$lr-success: theme-color("success");
+//$lr-danger: theme-color("danger");
+//$lr-warning: theme-color("warning");
+
+$lr-alarm-marquee-height: 1.75rem;

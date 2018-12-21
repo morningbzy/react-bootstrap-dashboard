@@ -1,39 +1,29 @@
 import React, { Component } from 'react';
-import { Card, Nav, NavDropdown } from 'react-bootstrap';
-
-import AlarmMarquee from "../components/AlarmMarquee/AlarmMarquee";
+import { Card, CardDeck, Nav } from 'react-bootstrap';
+import BarWidget from '../components/Widget/BarWidget';
+import PieWidget from '../components/Widget/PieWidget';
+import GaugeWidget from '../components/Widget/GaugeWidget';
+import InfoWidget from '../components/Widget/InfoWidget';
 
 class Dashboard extends Component {
   render() {
     return (
       <div id="container-wrapper" className="flex-grow-1">
-        <AlarmMarquee/>
         <Card className="border-0">
-          <Card.Header className="bg-white">
+          <Card.Header className="container-header">
             <Nav variant="tabs" defaultActiveKey="#first">
               <Nav.Item as="span" id="page-title">
                 <Nav.Link as="b" disabled>{this.props.title}</Nav.Link>
               </Nav.Item>
-              <Nav.Item>
-                <Nav.Link href="#first">Active</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link href="#link">Link</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link href="#disabled" disabled>Disabled</Nav.Link>
-              </Nav.Item>
-              <NavDropdown title="Dropdown">
-                <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
-                <NavDropdown.Item eventKey="4.2">Action</NavDropdown.Item>
-                <NavDropdown.Item eventKey="4.3">Action</NavDropdown.Item>
-                <NavDropdown.Divider/>
-                <NavDropdown.Item eventKey="4.4">Action</NavDropdown.Item>
-              </NavDropdown>
             </Nav>
           </Card.Header>
           <Card.Body>
-            body
+            <CardDeck>
+              <GaugeWidget title="Gauge Example"/>
+              <BarWidget title="Bar Example"/>
+              <PieWidget title="Pie Example"/>
+              <InfoWidget title="Info Example"/>
+            </CardDeck>
           </Card.Body>
         </Card>
       </div>

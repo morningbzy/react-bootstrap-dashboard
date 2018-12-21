@@ -1,15 +1,44 @@
 @import "../../base";
+@import "../../scss/mixins/_alarm_level.scss";
+@import "~bootstrap/scss/mixins/border-radius";
 
 #alarm-marquee {
-  background-color: theme-color-level("warning", -4);
-  height: 2rem;
-  line-height: 2rem;
+  background-color: theme-color-level("warning", -5);
+  font-size: .8rem;
+  height: $lr-alarm-marquee-height;
+  line-height: $lr-alarm-marquee-height;
+
   ul {
     list-style: none;
     padding: 0;
+    margin: 0;
     li {
       padding-left: 1rem;
       padding-right: 1rem;
+      position: relative;
+
+      @each $state, $color in $theme-colors {
+        @include lr-state($state, -color, $color) {
+          &:before {
+            background-color: $color;
+          }
+        }
+      }
+
+      &:before {
+        content: '';
+        position: absolute;
+        height: 3px;
+        @include border-top-radius(3px);
+        right: 0;
+        left: 0;
+        bottom: 0;
+        margin: 0 .5rem;
+      }
+
+      > span {
+        margin-left: .5rem;
+      }
     }
   }
 }

@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import { Card, Nav, NavDropdown } from 'react-bootstrap';
 
 import './MainContainer.scss';
-import AlarmMarquee from "../AlarmMarquee/AlarmMarquee";
 
 class MainContainer extends Component {
   render() {
     return (
       <div id="container-wrapper" className="flex-grow-1">
-        <AlarmMarquee/>
         <Card className="border-0">
           {this.props.title ? (
             <Card.Header className="bg-white">

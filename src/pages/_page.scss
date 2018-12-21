@@ -1,26 +1,8 @@
 @import "../base";
+@import "../scss/functions";
+@import "../scss/mixins/alarm_level";
 
-@mixin card-state($state, $css, $color) {
-  &.lr-#{$state} {
-    #{$css}: $color;
-  }
-}
-
-@mixin table-row-state($state, $css, $color) {
-  &.lr-#{$state} {
-    th,
-    td {
-      &:first-child {
-        #{$css}: $color;
-      }
-    }
-  }
-}
-
-@function px-to-rem($px) {
-  @return $px / 14px * 1rem;
-}
-
+// Override default CSS
 table {
   font-size: .8rem;
   td, th {
@@ -28,6 +10,12 @@ table {
   }
   &.table-sm .btn-sm {
     padding: .1rem .5rem;
+  }
+  &.table-flush {
+    margin: 0;
+    th {
+      border-top: 0;
+    }
   }
 }
 
@@ -38,6 +26,20 @@ table {
 .modal-header b {
   color: $title-bg;
   font-size: 1.2rem;
+}
+
+.nav-tabs {
+  .nav-link {
+    border-top-width: 3px;
+
+    @include hover-focus {
+    }
+  }
+
+  .nav-link.active,
+  .nav-item.show .nav-link {
+    border-top-color: $primary;
+  }
 }
 
 #page-title b {
@@ -52,10 +54,109 @@ table {
   margin-left: -1.5rem;
 }
 
-$lr-success: theme-color("success");
-$lr-danger: theme-color("danger");
-$lr-warning: theme-color("warning");
+// React bootstrap date range picker
+.rdt {
+  input[type="text"].form-control {
+    @extend .form-control-sm;
+  }
 
+  .rdtPicker {
+    width: 14rem;
+    @include reset-text();
+    font-size: $popover-font-size;
+    background-color: $popover-bg;
+    background-clip: padding-box;
+    border: $popover-border-width solid $popover-border-color;
+    @include border-radius($popover-border-radius);
+    @include box-shadow($popover-box-shadow);
+
+    td, th {
+      font-size: .75rem;
+      height: unset;
+      padding: 3px 0;
+    }
+
+    .rdtPrev span, .rdtNext span {
+      margin-top: -.25rem;
+    }
+
+    td.rdtDay,
+    td.rdtHour,
+    td.rdtMinute,
+    td.rdtSecond,
+    .rdtTimeToggle,
+    thead tr:first-child th {
+      &:hover {
+        background-color: $pagination-hover-bg;
+      }
+    }
+
+    td.rdtActive {
+      &, &:hover {
+        background-color: $primary;
+      }
+    }
+
+    td.rdtToday:before {
+      border-bottom: 7px solid $primary;
+    }
+  }
+}
+
+.react-bootstrap-daterangepicker-container {
+  width: 100%;
+}
+
+.badge.perm {
+  @extend .bg-white;
+  cursor: default;
+  border: 1px solid;
+  &.badge-danger {
+    @extend .text-danger;
+    border-color: $danger;
+  }
+  &.badge-dark {
+    @extend .text-dark;
+    border-color: $dark;
+  }
+}
+
+// Common
+.container-header {
+  background-color: $body-bg;
+}
+
+// Widget
+.dashboard-widget.card {
+  $widget-width: 310px;
+  $widget-body-height: 330px;
+
+  min-width: $widget-width;
+  max-width: $widget-width;
+  margin-bottom: $card-deck-margin;
+
+  &.widget-2x {
+    min-width: ($widget-width + $card-deck-margin) * 2;
+  }
+
+  .card-header {
+    padding: .25rem .75rem;
+
+    .nav-item .btn {
+      padding: 0;
+      line-height: 1;
+      vertical-align: baseline;
+    }
+  }
+
+  .card-body {
+    height: $widget-body-height;
+    padding: $card-spacer-y .75rem;
+    overflow-y: auto;
+  }
+}
+
+// Agent
 .card.lr-agent-card {
   min-width: 18rem !important;
   max-width: 18rem !important;
@@ -96,27 +197,6 @@ $lr-warning: theme-color("warning");
   }
 }
 
-.lr-alarm-table {
-  font-size: .8rem;
-
-  tr {
-    th,
-    td {
-      &:first-child {
-        border-left-width: 0;
-        border-left-style: solid;
-        border-left-color: transparent;
-      }
-    }
-
-    //&:hover {
-    //  @each $state, $color in $theme-colors {
-    //    @include table-row-state($state, border-left-color, $color);
-    //  }
-    //}
-  }
-}
-
 .agent-content {
   @extend .d-flex;
 
@@ -137,6 +217,7 @@ $lr-warning: theme-color("warning");
     position: fixed;
     bottom: $card-spacer-y;
     height: 300px;
+    font-size: .8rem;
 
     .timeline-bar {
       position: absolute;
@@ -218,68 +299,25 @@ $lr-warning: theme-color("warning");
   }
 }
 
-.rdt {
-  input[type="text"].form-control {
-    @extend .form-control-sm;
-  }
+// Alarm
+.lr-alarm-table {
+  font-size: .8rem;
 
-  .rdtPicker {
-    width: 14rem;
-    @include reset-text();
-    font-size: $popover-font-size;
-    background-color: $popover-bg;
-    background-clip: padding-box;
-    border: $popover-border-width solid $popover-border-color;
-    @include border-radius($popover-border-radius);
-    @include box-shadow($popover-box-shadow);
-
-    td, th {
-      font-size: .75rem;
-      height: unset;
-      padding: 3px 0;
-    }
-
-    .rdtPrev span, .rdtNext span {
-      margin-top: -.25rem;
-    }
-
-    td.rdtDay,
-    td.rdtHour,
-    td.rdtMinute,
-    td.rdtSecond,
-    .rdtTimeToggle,
-    thead tr:first-child th {
-      &:hover {
-        background-color: $pagination-hover-bg;
+  tr {
+    th,
+    td {
+      &:first-child {
+        border-left-width: 0;
+        border-left-style: solid;
+        border-left-color: transparent;
       }
     }
 
-    td.rdtActive {
-      &, &:hover {
-        background-color: $primary;
-      }
-    }
-
-    td.rdtToday:before {
-      border-bottom: 7px solid $primary;
-    }
+    //&:hover {
+    //  @each $state, $color in $theme-colors {
+    //    @include table-row-state($state, border-left-color, $color);
+    //  }
+    //}
   }
 }
 
-.react-bootstrap-daterangepicker-container {
-  width: 100%;
-}
-
-.badge.perm {
-  @extend .bg-white;
-  cursor: default;
-  border: 1px solid;
-  &.badge-danger {
-    @extend .text-danger;
-    border-color: $danger;
-  }
-  &.badge-dark {
-    @extend .text-dark;
-    border-color: $dark;
-  }
-}
