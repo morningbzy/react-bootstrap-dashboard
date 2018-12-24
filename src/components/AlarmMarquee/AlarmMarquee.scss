@@ -3,7 +3,7 @@
 @import "~bootstrap/scss/mixins/border-radius";
 
 #alarm-marquee {
-  background-color: theme-color-level("warning", -5);
+  background-color: theme-color-level('warning', -6);
   font-size: .8rem;
   height: $lr-alarm-marquee-height;
   line-height: $lr-alarm-marquee-height;

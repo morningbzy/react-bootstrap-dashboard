@@ -21,6 +21,7 @@ export default class extends Component {
   getOption() {
     return {
       title: {text: 'Example',},
+      tooltip: {},
       xAxis: {
         data: ['a', 'b', 'c', 'd', 'e', 'f'],
       },

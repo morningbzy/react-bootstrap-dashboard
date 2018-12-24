@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Card, CardDeck, Nav } from 'react-bootstrap';
 import BarWidget from '../components/Widget/BarWidget';
+import LineWidget from '../components/Widget/LineWidget';
 import PieWidget from '../components/Widget/PieWidget';
+import DoughnutWidget from '../components/Widget/DoughnutWidget';
 import GaugeWidget from '../components/Widget/GaugeWidget';
 import InfoWidget from '../components/Widget/InfoWidget';
+import StackBarWidget from '../components/Widget/StackBarWidget';
 
 class Dashboard extends Component {
   render() {
@@ -19,9 +22,12 @@ class Dashboard extends Component {
           </Card.Header>
           <Card.Body>
             <CardDeck>
-              <GaugeWidget title="Gauge Example"/>
               <BarWidget title="Bar Example"/>
+              <LineWidget title="Line Example"/>
+              <DoughnutWidget title="Doughnut Example"/>
               <PieWidget title="Pie Example"/>
+              <StackBarWidget title="Stack Bar Example"/>
+              <GaugeWidget title="Gauge Example"/>
               <InfoWidget title="Info Example"/>
             </CardDeck>
           </Card.Body>
