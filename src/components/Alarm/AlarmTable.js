@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Table } from 'react-bootstrap';
-import { STATES, API_BASE_URL  } from "../../common/constants";
+import { STATES, API_BASE_URL } from "../../common/constants";
 import Pagination from "../Pagination/Pagination";
 
 class AlarmTable extends Component {
@@ -26,9 +26,10 @@ class AlarmTable extends Component {
 
   render() {
     const {data} = this.state;
+    const {className = '', variant = ''} = this.props;
     return (
       <>
-        <Table hover size="sm" className="lr-alarm-table">
+        <Table hover size="sm" className={"lr-alarm-table " + className} variant={variant}>
           <thead>
           <tr>
             <th>#</th>
@@ -42,7 +43,7 @@ class AlarmTable extends Component {
           {data.list.map(alarm => {
             const state = STATES[alarm.state];
             return (
-              <tr key={alarm.id} className={`table-${state} lr-${state}`}>
+              <tr key={alarm.id} className={`-table-${state} lr-${state}`}>
                 <td>{alarm.id}</td>
                 <td>{alarm.ip}</td>
                 <td>{alarm.sysName}</td>

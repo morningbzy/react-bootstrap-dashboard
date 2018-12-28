@@ -1,0 +1,123 @@
+@import "../../base";
+@import "~bootstrap/scss/mixins/transition";
+@import "../../scss/functions";
+
+$agent-tree-width: $right-sidebar-width;
+
+.agent-tree-wrapper {
+  width: $agent-tree-width - px-to-rem(15px);
+  padding-left: 15px;
+  padding-top: 15px;
+}
+
+.agent-tree-nav {
+  padding: 0;
+  font-size: .9rem;
+
+  ul, li {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  $indent: 1em;
+  $indicator-left: .3em;
+  $indicator-leaf-left: .1em;
+  $indicator-expended-left: 0;
+
+  li {
+    text-indent: $indent;
+    line-height: 2em;
+    &:before {
+    }
+
+    li {
+      text-indent: $indent * 2;
+      &:before {
+        left: $indicator-left + $indent !important;
+      }
+      &.leaf:before {
+        left: $indicator-leaf-left + $indent !important;
+      }
+      &.root:before,
+      &.expended:before {
+        left: $indicator-expended-left + $indent !important;
+      }
+
+      li {
+        text-indent: $indent * 3;
+        &:before {
+          left: $indicator-left + $indent * 2 !important;
+        }
+        &.leaf:before {
+          left: $indicator-leaf-left + $indent * 2 !important;
+        }
+        &.root:before,
+        &.expended:before {
+          left: $indicator-expended-left + $indent * 2 !important;
+        }
+
+        li {
+          text-indent: $indent * 4;
+          &:before {
+            left: $indicator-left + $indent * 3 !important;
+          }
+          &.leaf:before {
+            left: $indicator-leaf-left + $indent * 3 !important;
+          }
+          &.root:before,
+          &.expended:before {
+            left: $indicator-expended-left + $indent * 3 !important;
+          }
+        }
+      }
+    }
+  }
+
+  li {
+    span,
+    a {
+      display: block;
+    }
+
+    &:not(.leaf) {
+      > span,
+      > a {
+        cursor: pointer;
+      }
+    }
+  }
+
+  li {
+    position: relative;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 1em - .3em;
+      left: $indicator-left;
+      height: .6em;
+      width: .6em;
+      cursor: pointer;
+      border-top: .3em solid transparent;
+      border-bottom: .3em solid transparent;
+      border-left: .3em solid gray;
+      border-right: 0;
+    }
+    &.leaf:before {
+      left: $indicator-leaf-left;
+      top: 1em - .15em;
+      height: .4em;
+      width: .4em;
+      border: 2px solid gray;
+      border-radius: .2em;
+    }
+    &.root:before,
+    &.expended:before {
+      top: 1em - .15em;
+      left: $indicator-expended-left;
+      border-top: .3em solid gray;
+      border-bottom: 0;
+      border-left: .3em solid transparent;
+      border-right: .3em solid transparent;
+    }
+  }
+}

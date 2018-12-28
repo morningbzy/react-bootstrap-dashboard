@@ -31,8 +31,8 @@ class AgentGrid extends Component {
     return (
       <>
         <CardDeck>
-          {data.list.map(agent => (
-            <Card key={agent.id} className={"lr-agent-card lr-" + STATES[agent.state]}>
+          {data.list.map((agent, idx) => (
+            <Card key={`${agent.id}@${idx}`} className={"lr-agent-card lr-" + STATES[agent.state]}>
               <Card.Header as="b">
                 <Link to={"/agent/" + agent.ip}>{agent.ip}</Link>
               </Card.Header>

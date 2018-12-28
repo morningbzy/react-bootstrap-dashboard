@@ -1,12 +1,14 @@
 @import "../../base";
 @import "../../scss/mixins/_alarm_level.scss";
 @import "~bootstrap/scss/mixins/border-radius";
+@import "~bootstrap/scss/mixins/box-shadow";
 
 #alarm-marquee {
   background-color: theme-color-level('warning', -6);
   font-size: .8rem;
   height: $lr-alarm-marquee-height;
   line-height: $lr-alarm-marquee-height;
+  @include box-shadow(0px 1px 10px 0px rgba($black, .5));
 
   ul {
     list-style: none;

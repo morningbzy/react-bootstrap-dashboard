@@ -7,5 +7,6 @@ import AlarmHistory from './AlarmHistory';
 import UserMgr from './UserMgr';
 import RoleMgr from './RoleMgr';
 import PermMgr from './PermMgr';
+import Signin from './Signin';
 
-export { Home, Dashboard, Agent, AgentSpec, Alarm, AlarmHistory, UserMgr, RoleMgr, PermMgr };
+export { Home, Dashboard, Agent, AgentSpec, Alarm, AlarmHistory, UserMgr, RoleMgr, PermMgr, Signin };

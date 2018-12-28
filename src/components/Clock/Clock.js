@@ -19,12 +19,12 @@ class Clock extends Component {
     let url = `${API_BASE_URL}/rest-api/datetime`;
     axios.get(url)
       .then((resp) => {
-        this.setState({datetime: moment(resp.data)})
+        // this.setState({datetime: moment(resp.data)})
       });
   };
 
   tik = () => {
-    this.setState({datetime: this.state.datetime.add(1, 'seconds')});
+    // this.setState({datetime: this.state.datetime.add(1, 'seconds')});
   };
 
   render() {

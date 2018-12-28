@@ -1,5 +1,11 @@
+$enable-shadows: true;
+
 $title-bg: adjust_color($color: $primary, $lightness: -20%, $saturation: -10%);
+//$title-bg: darken($dark, 5%);
 $title-color: color-yiq($title-bg);
+
+$sidebar-width: 12.5rem;
+$right-sidebar-width: 12.5rem;
 
 $nav-link-padding-y: .25rem;
 
@@ -8,3 +14,5 @@ $nav-link-padding-y: .25rem;
 //$lr-warning: theme-color("warning");
 
 $lr-alarm-marquee-height: 1.75rem;
+
+

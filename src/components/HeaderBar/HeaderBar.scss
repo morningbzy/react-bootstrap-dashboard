@@ -2,9 +2,7 @@
 @import "~bootstrap/scss/mixins/transition";
 
 #header {
-  height: 40px;
   background-color: $title-bg;
-  font-size: .8rem !important;
   $color: $title-color;
 
   .nav-link {
@@ -19,13 +17,16 @@
 }
 
 #alarm-marquee-wrapper {
+  position: fixed;
+  top: 48px;
   display: flex;
   height: 0;
   z-index: 1000;
 }
 
-.alarm-marquee-left {
-  width: 200px;
+.alarm-marquee-left,
+.alarm-marquee-right {
+  width: $sidebar-width;
   flex-shrink: 0;
   @include transition(all 0.3s cubic-bezier(.645, .045, .355, 1));
 }

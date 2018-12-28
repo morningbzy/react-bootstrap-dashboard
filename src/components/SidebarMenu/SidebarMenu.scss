@@ -2,31 +2,92 @@
 @import "~bootstrap/scss/mixins/transition";
 @import "~bootstrap/scss/mixins/caret";
 
-$sidebar-width: 200px;
-$sidebar-bg: darken($dark, 5%);
+$sidebar-transition: all 0.3s cubic-bezier(.645, .045, .355, 1);
+$sidebar-indicator-transition: $sidebar-transition;
+
+$sidebar-light-color: $navbar-light-color;
+$sidebar-light-bg: $light;
+$sidebar-light-sub-bg: darken($sidebar-light-bg, 5);
+$sidebar-light-border-color: rgba($black, .125);
+
+$sidebar-light-hover-color: $navbar-light-hover-color;
+$sidebar-light-active-bg: $primary;
+$sidebar-light-active-color: color-yiq($sidebar-light-active-bg);
+
+$sidebar-dark-color: $navbar-dark-color;
+$sidebar-dark-bg: darken($dark, 10%);
+$sidebar-dark-sub-bg: darken($sidebar-dark-bg, 10%);
+$sidebar-dark-border-color: rgba($white, .875);
+
+$sidebar-dark-hover-color: $navbar-dark-hover-color;
+$sidebar-dark-active-bg: $primary;
+$sidebar-dark-active-color: color-yiq($sidebar-dark-active-bg);
+
 $sidebar-indicator-width: .2rem;
+$sidebar-light-indicator-color: $sidebar-light-active-bg;
+$sidebar-light-indicator-active-color: $sidebar-light-active-bg;
+$sidebar-dark-indicator-color: $primary;
+$sidebar-dark-indicator-active-color: $sidebar-dark-active-bg;
 
 #sidebar-wrapper {
   width: $sidebar-width;
   flex-shrink: 0;
-  overflow-y: auto;
-  background-color: $sidebar-bg;
-  @include transition(all 0.3s cubic-bezier(.645, .045, .355, 1));
+  overflow: hidden auto;
+  border-right: 1px solid $sidebar-light-border-color;
+  @include transition($sidebar-transition);
+
+  background-color: $sidebar-light-bg;
+  color: $sidebar-light-color;
+
+  &.dark {
+    border-right: 1px solid $sidebar-dark-border-color;
+    background-color: $sidebar-dark-bg;
+    color: $sidebar-dark-color;
+    .sidebar-nav {
+      .subscript {
+        color: rgba($sidebar-dark-bg, 0.75);
+      }
+    }
+
+    li {
+      ul {
+        background-color: $sidebar-dark-sub-bg; // rgba(0,0,0,.75);
+      }
+
+      span, a {
+        color: $sidebar-dark-color;
+
+        &:hover {
+          color: $sidebar-dark-hover-color;
+        }
+        &.active {
+          color: $sidebar-dark-active-color;
+          background-color: $sidebar-dark-active-bg;
+          .subscript {
+            color: rgba($sidebar-dark-indicator-color, 0.6);
+          }
+        }
+      }
+    }
+  }
 }
 
 .sidebar-nav {
   width: $sidebar-width;
   margin: 0;
   padding: 0;
-  list-style-type: none;
+
+  ul, li {
+    list-style-type: none;
+  }
 
   ul {
     padding-left: 0;
   }
 
   .subscript {
-    color: rgba($sidebar-bg, 0.75);
-    @include transition(all 0.3s cubic-bezier(.645, .045, .355, 1));
+    color: rgba($sidebar-light-bg, 0.75);
+    @include transition($sidebar-transition);
   }
 
   li:not(.leaf) {
@@ -55,32 +116,48 @@ $sidebar-indicator-width: .2rem;
 
   li {
     ul {
-      background-color: rgba(0,0,0,.75);
+      background-color: $sidebar-light-sub-bg;
     }
 
     span, a {
+      &:before {
+        content: '';
+        position: absolute;
+        width: $sidebar-indicator-width;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        background-color: transparent;
+        @include transition($sidebar-indicator-transition);
+      }
+
       font-size: $font-size-sm;
       display: block;
       text-decoration: none;
-      color: $navbar-dark-color;
-      border-left: transparent $sidebar-indicator-width solid;
+      color: $sidebar-light-color;
       cursor: pointer;
+      position: relative;
 
-      @include transition(all 0.3s cubic-bezier(.645, .045, .355, 1));
+      @include transition($sidebar-transition);
 
       &:hover {
-        color: $navbar-dark-hover-color;
-        //color: rgba($navbar-dark-hover-color, .9);
-        border-left: darken($title-bg, 5%) $sidebar-indicator-width solid;
+        color: $sidebar-light-hover-color;
+        &:before {
+          top: 0;
+          bottom: 0;
+          background-color: $sidebar-light-indicator-color;
+        }
       }
       &.active {
-        color: color-yiq($primary);
-        //color: $navbar-dark-active-color;
-        //color: rgba($navbar-dark-hover-color, .9);
-        background-color: $primary;
-        border-left: $primary $sidebar-indicator-width solid;
+        color: $sidebar-light-active-color;
+        background-color: $sidebar-light-active-bg;
         .subscript {
-          color: rgba($primary, 0.6);
+          color: rgba($sidebar-light-indicator-active-color, 0.6);
+        }
+        &:before {
+          top: 0;
+          bottom: 0;
+          background-color: $sidebar-light-indicator-active-color;
         }
       }
     }

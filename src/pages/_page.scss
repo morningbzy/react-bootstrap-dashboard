@@ -12,7 +12,7 @@ table {
     padding: .1rem .5rem;
   }
   &.table-flush {
-    margin: 0;
+    //margin: 0;
     th {
       border-top: 0;
     }
@@ -33,12 +33,23 @@ table {
     border-top-width: 3px;
 
     @include hover-focus {
+      border-top-color: transparentize($primary, .75);
+      @each $state, $color in $theme-colors {
+        @include lr-state($state, border-top-color, transparentize($color, .75));
+      }
+    }
+
+    &.disabled {
+      border-top-color: transparent !important;
     }
   }
 
   .nav-link.active,
   .nav-item.show .nav-link {
     border-top-color: $primary;
+    @each $state, $color in $theme-colors {
+      @include lr-state($state, border-top-color, $color);
+    }
   }
 }
 
@@ -199,14 +210,15 @@ table {
 
 .agent-content {
   @extend .d-flex;
+  flex-direction: column;
 
   .main-content {
-    @extend .flex-grow-1;
+    flex-grow: 1;
     margin-right: $card-spacer-x;
   }
 
   .side-content {
-    width: 200px;
+    width: 140px;
     @extend .flex-shrink-0;
   }
 
@@ -321,3 +333,24 @@ table {
   }
 }
 
+// Tab
+.tab-container {
+  position: relative;
+
+  &.ignore-outside-card {
+    .card-header-tabs {
+      margin: 0;
+      padding: 0 ($card-spacer-x / 2);
+      //border-bottom: $card-border-width solid $card-border-color;
+    }
+  }
+
+  .tab-content {
+    border: $card-border-width solid $card-border-color;
+    border-radius: $card-inner-border-radius;
+
+    .tab-pane {
+      padding: $card-spacer-y $card-spacer-x;
+    }
+  }
+}

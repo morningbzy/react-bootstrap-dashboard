@@ -87,31 +87,31 @@ class SidebarMenu extends Component {
     return menu ? menu.map((m, i) => {
       const {exact = true} = m;
       return (
-        <li key={i} className={m.subMenu ? '' : 'leaf'}>
-          {m.subMenu ? (
-            <>
-              <span onClick={this.toggleExpend}>{this.icon(m)} {m.title} </span>
-              <ul style={{display: 'none'}}>{this.renderMenu(m.subMenu)}</ul>
-            </>
-          ) : (
+        m.subMenu ? (
+          <li key={i}>
+            <span onClick={this.toggleExpend}>{this.icon(m)} {m.title} </span>
+            <ul style={{display: 'none'}}>{this.renderMenu(m.subMenu)}</ul>
+          </li>
+        ) : (
+          <li key={i} className="leaf">
             <LinkContainer to={m.path || m.key} exact={exact}>
               <span>{this.icon(m)} {m.title}</span>
             </LinkContainer>
-          )}
-        </li>
+          </li>
+        )
       );
     }) : null;
   };
 
   toggleExpend = (e) => {
-    let li = $(e.currentTarget).parents('li');
+    let li = $(e.currentTarget).closest('li:not(.leaf)', '.agent-tree-nav');
     li.toggleClass('expended');
-    $('ul', li).slideToggle(250);
+    $('> ul', li).slideToggle(250);
   };
 
   render() {
     return (
-      <div id="sidebar-wrapper">
+      <div id="sidebar-wrapper" className="dark">
         <ul className="sidebar-nav" id="menu">
           {this.renderMenu(this.state.menu)}
         </ul>

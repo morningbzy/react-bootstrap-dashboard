@@ -19,7 +19,7 @@ class AlarmMarquee extends Component {
 
   componentDidMount() {
     this.get();
-    this.pool(5000);
+    this.timer = this.pool(5000);
   }
 
   componentWillUnmount() {
@@ -44,7 +44,7 @@ class AlarmMarquee extends Component {
   };
 
   pool(timeout) {
-    this.timer = setInterval(this.get, timeout);
+    return setTimeout(this.get, timeout);
   }
 
   render() {

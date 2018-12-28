@@ -25,3 +25,18 @@ $sidebar-bg: darken($dark, 10%);
   overflow-x: hidden;
   padding-top: $lr-alarm-marquee-height;
 }
+
+#right-sidebar-wrapper {
+  width: $right-sidebar-width;
+  overflow: auto;
+  flex-shrink: 0;
+  background-color: $light;
+  padding-top: 1.75rem;
+  @include transition(all 0.3s cubic-bezier(.645, .045, .355, 1));
+}
+
+.right-sidebar-collapsed {
+  #right-sidebar-wrapper {
+    width: 0;
+  }
+}
