@@ -1,0 +1,40 @@
+@import "../../base";
+@import "~bootstrap/scss/mixins/hover";
+@import "../../scss/mixins/alarm_level";
+
+.lr-alarm-brief-chart-card {
+  color: $white;
+
+  @each $state, $color in $theme-colors {
+    @include lr-state($state, background-color, $color);
+
+    &.lr-#{$state} .lr-icon-circle {
+      color: mix(color-yiq($color), $color, 20%);
+    }
+  }
+}
+
+.lr-stack {
+  cursor: pointer;
+}
+
+.lr-unstacked {
+  position: relative;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.5);
+
+  @include hover-focus {
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  span.arrow {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    margin-top: -.5rem;
+    display: block;
+    height: 1rem;
+    text-align: center;
+  }
+}

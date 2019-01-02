@@ -8,6 +8,7 @@ import { Form as FormikForm, Formik } from "formik";
 import 'react-datetime/css/react-datetime.css';
 import 'bootstrap-daterangepicker/daterangepicker.css';
 import { LinkContainer } from "react-router-bootstrap";
+import AlarmBriefChartBar from "../components/Alarm/AlarmBriefChart";
 
 
 class AlarmHistory extends Component {
@@ -123,6 +124,7 @@ class AlarmHistory extends Component {
                 );
               }}
             />
+            <AlarmBriefChartBar className="mb-4"/>
             <AlarmTable/>
           </Card.Body>
         </Card>

@@ -4,7 +4,7 @@ import './AlarmMarquee.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import Marquee from "./Marquee";
-import { STATES, STATE_ICONS, API_BASE_URL } from "../../common/constants";
+import { STATES, STATE_ICONS_CIRCLE, API_BASE_URL } from "../../common/constants";
 
 class AlarmMarquee extends Component {
   constructor(props) {
@@ -55,7 +55,7 @@ class AlarmMarquee extends Component {
           <ul key={Math.random()} className="d-flex">
             {list.map(i =>
               <li key={i.id} className={`lr-${STATES[i.state]}`}>
-                <FontAwesomeIcon icon={STATE_ICONS[STATES[i.state]]}
+                <FontAwesomeIcon icon={STATE_ICONS_CIRCLE[STATES[i.state]]}
                                  className={`text-${STATES[i.state]} lr-${STATES[i.state]}`}
                                  fixedWidth/>
                 <span>{i.ip} {i.datetime} {i.sysName} {i.desc}</span>
