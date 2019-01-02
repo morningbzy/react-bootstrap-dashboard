@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import BaseLayout from "./components/BaseLayout/BaseLayout";
-import { BrowserRouter } from "react-router-dom";
-import { library } from "@fortawesome/fontawesome-svg-core";
+import {BrowserRouter} from "react-router-dom";
+import {library} from "@fortawesome/fontawesome-svg-core";
 import {
   fas,
   faHome,
@@ -27,6 +27,8 @@ import {
   faFileAlt,
   faDesktop,
   faLaptop,
+  faExclamation,
+  faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -51,7 +53,7 @@ library.add(
   // solid
   fas, faHome, faInfo, faInfoCircle, faCogs, faCog, faTachometerAlt, faTrash, faPen, faBell, faCircle, faServer,
   faNetworkWired, faTimesCircle, faExclamationTriangle, faSkull, faSync, faRedo, faHdd, faSearch, faEthernet,
-  faFileAlt, faDesktop, faLaptop,
+  faFileAlt, faDesktop, faLaptop, faExclamation, faTimes,
   // brand
   fab, faLinux, faUbuntu, faWindows,
 );
