@@ -3,6 +3,7 @@ import { Card, Nav, Pagination, Table, ButtonGroup, Button, Modal, Form, Row, Co
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { LinkContainer } from "react-router-bootstrap";
+import PageHeader from "../components/PageHeader";
 
 
 class Role extends Component {
@@ -10,6 +11,30 @@ class Role extends Component {
     super(props);
     this.state = {
       show: false,
+      header: {
+        title: this.props.title,
+        tabs: [
+          {
+            title: 'User',
+            to: '/sysmgr/user',
+            props: {
+              exact: true,
+            },
+          }, {
+            title: 'Role',
+            to: '/sysmgr/role',
+            props: {
+              exact: true,
+            },
+          }, {
+            title: 'Permission',
+            to: '/sysmgr/perm',
+            props: {
+              exact: true,
+            },
+          },
+        ],
+      },
       data: [
         {
           id: 1,
@@ -31,31 +56,13 @@ class Role extends Component {
   }
 
   render() {
+    const {header} = this.state;
     return (
       <>
         <div id="container-wrapper" className="flex-grow-1">
           <Card className="border-0">
             <Card.Header className="container-header">
-              <Nav variant="tabs" defaultActiveKey="#first">
-                <Nav.Item as="span" id="page-title">
-                  <Nav.Link as="b" disabled>{this.props.title}</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <LinkContainer to={"/sysmgr/user"} exact>
-                    <Nav.Link>User</Nav.Link>
-                  </LinkContainer>
-                </Nav.Item>
-                <Nav.Item>
-                  <LinkContainer to={"/sysmgr/role"} exact>
-                    <Nav.Link>Role</Nav.Link>
-                  </LinkContainer>
-                </Nav.Item>
-                <Nav.Item>
-                  <LinkContainer to={"/sysmgr/perm"} exact>
-                    <Nav.Link>Permission</Nav.Link>
-                  </LinkContainer>
-                </Nav.Item>
-              </Nav>
+              <PageHeader {...header}/>
             </Card.Header>
             <Card.Body>
               <Table hover size="sm" striped>
@@ -74,8 +81,8 @@ class Role extends Component {
                       <td>{role.id}</td>
                       <td>{role.role}</td>
                       <td>
-                        {role.perms.map((perm) => (
-                          <Badge variant={perm === 'admin' ? 'danger' : 'dark'} className="perm mr-1">{perm}</Badge>
+                        {role.perms.map((perm, i) => (
+                          <Badge key={i} variant={perm === 'admin' ? 'danger' : 'dark'} className="perm mr-1">{perm}</Badge>
                         ))}
                       </td>
                       <td>

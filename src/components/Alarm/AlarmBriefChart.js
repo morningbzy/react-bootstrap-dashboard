@@ -6,11 +6,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './AlarmBriefChart.scss';
 import { STATE_ICONS, STATE_LABEL } from "../../common/constants";
 import { capitalize } from "../../common/functions";
+import AlarmIcons from "../AlarmIcon";
 
 
 class AlarmBriefChart extends Component {
   getOption() {
-    const {data, total} = this.props.data;
+    const {variant = 'dark'} = this.props;
+    const {data, total,} = this.props.data;
+    const chartColor = variant === 'dark' ? '255,255,255' : '0,0,0';
 
     return {
       total,
@@ -29,7 +32,7 @@ class AlarmBriefChart extends Component {
         axisPointer: {
           type: 'shadow',
           shadowStyle: {
-            color: 'rgba(255,255,255,.05)',
+            color: `rgba(${chartColor},.05)`,
           }
         }
       },
@@ -47,11 +50,11 @@ class AlarmBriefChart extends Component {
           data: data,
           barWidth: '70%',
           itemStyle: {
-            color: 'rgba(255,255,255,.75)',
+            color: `rgba(${chartColor},.75)`,
           },
           emphasis: {
             itemStyle: {
-              color: 'rgba(255,255,255,.9)',
+              color: `rgba(${chartColor},.9)`,
             }
           }
         },
@@ -64,34 +67,27 @@ class AlarmBriefChart extends Component {
       state,
       iconSizeX = "3rem",
       iconSizeY = "3rem",
-      iconInnerSizeX = "50%",
-      iconInnerSizeY = "50%",
       chartSizeX = "100px",
       chartSizeY = "",
     } = this.props;
     const {percentage} = this.props.data;
-
     const {total, ...option} = this.getOption();
+
     return (
-      <Card className={`lr-alarm-brief-chart-card lr-${state}`}>
-        <Card.Body className="p-2">
-          <div className="d-flex justify-content-between font-weight-light">
-            <div className="d-flex flex-column align-items-center">
-              <i className="fa-layers fa-fw" style={{height: iconSizeY, width: iconSizeX,}}>
-                <FontAwesomeIcon tag="i" fixedWidth icon="circle" className={`lr-icon-circle`}
-                                 style={{height: iconSizeY, width: iconSizeX,}}/>
-                <FontAwesomeIcon icon={['fas', STATE_ICONS[state]]}
-                                 style={{height: iconInnerSizeY, width: iconInnerSizeX,}}/>
-              </i>
+      <Card className={`lr-alarm-card lr-${state}`}>
+        <Card.Body className="px-2 py-1">
+          <div className="d-flex justify-content-between align-items-center">
+            <div className="d-flex flex-column">
+              <AlarmIcons state={state} height={iconSizeY} width={iconSizeX}/>
             </div>
             <div className="text-right d-flex flex-column">
-              <h4 className="mb-0 font-weight-light">{total}</h4>
+              <h4 className="mb-0">{total}</h4>
               <p className="mb-auto">{percentage}%</p>
             </div>
           </div>
         </Card.Body>
         <Card.Footer className="px-2 py-1">
-          <div className="d-flex justify-content-between font-weight-light">
+          <div className="d-flex justify-content-between">
             <span>{capitalize(STATE_LABEL[state])}</span>
             <ReactEcharts className="lr-chart" option={option}
                           style={{height: chartSizeY, width: chartSizeX,}}/>
@@ -130,9 +126,15 @@ export default class AlarmBriefChartBar extends Component {
   };
 
   render() {
-    const {stack, className, ...rest} = this.props;
+    const {
+      stack,
+      className,
+      variant = 'dark',
+      ...rest
+    } = this.props;
+
     return this.state.stack === true ? (
-      <ProgressBar onClick={this.toggleStack} className={`lr-stack ${className}`}>
+      <ProgressBar onClick={this.toggleStack} className={`lr-alarm-brief-chart lr-stack lr-${variant} ${className}`}>
         {
           Object.entries(this.data).map((item, i) => (
             <ProgressBar key={i} variant={item[0]} now={item[1].percentage}
@@ -141,11 +143,11 @@ export default class AlarmBriefChartBar extends Component {
         }
       </ProgressBar>
     ) : (
-      <div className={`lr-unstacked ${className}`} onClick={this.toggleStack} {...rest}>
+      <div className={`lr-alarm-brief-chart lr-unstacked lr-${variant} ${className}`} onClick={this.toggleStack} {...rest}>
         <CardDeck>
           {
             Object.entries(this.data).map((item, i) => (
-              <AlarmBriefChart state={item[0]} data={item[1]}/>
+              <AlarmBriefChart key={i} state={item[0]} data={item[1]} variant={variant}/>
             ))
           }
         </CardDeck>

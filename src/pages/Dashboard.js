@@ -7,18 +7,25 @@ import DoughnutWidget from '../components/Widget/DoughnutWidget';
 import GaugeWidget from '../components/Widget/GaugeWidget';
 import InfoWidget from '../components/Widget/InfoWidget';
 import StackBarWidget from '../components/Widget/StackBarWidget';
+import PageHeader from "../components/PageHeader";
 
 class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      header: {
+        title: this.props.title,
+      },
+    };
+  }
+
   render() {
+    const {header} = this.state;
     return (
       <div id="container-wrapper" className="flex-grow-1">
         <Card className="border-0">
           <Card.Header className="container-header">
-            <Nav variant="tabs" defaultActiveKey="#first">
-              <Nav.Item as="span" id="page-title">
-                <Nav.Link as="b" disabled>{this.props.title}</Nav.Link>
-              </Nav.Item>
-            </Nav>
+            <PageHeader {...header}/>
           </Card.Header>
           <Card.Body>
             <CardDeck>

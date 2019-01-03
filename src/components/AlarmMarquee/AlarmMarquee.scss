@@ -1,5 +1,5 @@
 @import "../../base";
-@import "../../scss/mixins/_alarm_level.scss";
+@import "../../scss/mixins/alarm_level";
 @import "~bootstrap/scss/mixins/border-radius";
 @import "~bootstrap/scss/mixins/box-shadow";
 
@@ -24,6 +24,10 @@
           &:before {
             background-color: $color;
           }
+
+          .lr-alarm-icon-bg {
+            color: mix(color-yiq($color), $color, 10%);
+          }
         }
       }
 
@@ -42,5 +46,10 @@
         margin-left: .5rem;
       }
     }
+  }
+
+  .lr-alarm-icon {
+    margin-bottom: -.15rem;
+    color: theme-color-level('warning', -6);
   }
 }

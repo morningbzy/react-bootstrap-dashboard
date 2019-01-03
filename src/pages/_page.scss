@@ -59,6 +59,7 @@ table {
   padding-top: $nav-link-padding-y - .2rem;
   padding-bottom: $nav-link-padding-y - .2rem;
   padding-left: $card-spacer-x / 2;
+  height: 36px;
 }
 
 #page-subtitle {
@@ -135,6 +136,38 @@ table {
 // Common
 .container-header {
   background-color: $body-bg;
+
+  .lr-alarm-panel {
+    margin-right: -.625rem;
+    margin-top: 3px;
+
+    & > .card {
+      position: relative;
+      margin-left: .5rem;
+      margin-right: .5rem;
+
+      &:first-child:before {
+        border-top-left-radius: 2px;
+      }
+
+      &:before {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: -.5rem;
+        right: -.5rem;
+        height: 2px;
+      }
+
+      @each $state, $color in $theme-colors {
+        @include lr-state($state, color, $color) {
+          &:before {
+            background-color: $color;
+          }
+        }
+      }
+    }
+  }
 }
 
 // Widget

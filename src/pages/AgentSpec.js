@@ -8,22 +8,27 @@ import InfoWidget from "../components/Widget/InfoWidget";
 import GaugeWidget from "../components/Widget/GaugeWidget";
 import BarWidget from "../components/Widget/BarWidget";
 import AlarmTable from "../components/Alarm/AlarmTable";
+import PageHeader from "../components/PageHeader";
 
 class Agent extends Component {
-  render() {
+  constructor(props) {
+    super(props);
     const {match} = this.props;
+    this.state = {
+      header: {
+        title: this.props.title,
+        subtitle: match.params.id,
+      },
+    };
+  }
+
+  render() {
+    const {header} = this.state;
     return (
       <div id="container-wrapper" className="flex-grow-1">
         <Card className="border-0">
           <Card.Header className="container-header">
-            <Nav variant="tabs">
-              <Nav.Item as="span" id="page-title">
-                <Nav.Link as="b" disabled>{this.props.title}</Nav.Link>
-              </Nav.Item>
-              <Nav.Item as="span" id="page-subtitle">
-                <Nav.Link as="b" disabled>{match.params.id}</Nav.Link>
-              </Nav.Item>
-            </Nav>
+            <PageHeader {...header}/>
           </Card.Header>
           <Card.Body className="agent-content">
             <ButtonToolbar>
@@ -60,7 +65,7 @@ class Agent extends Component {
                   <Card.Body className="p-2 d-flex flex-wrap">
                     {
                       [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map(i => (
-                        <Card style={{flex: "0 0 auto",}} className="mb-1">
+                        <Card key={i} style={{flex: "0 0 auto",}} className="mb-1">
                           <Card.Header
                             className={`px-1 py-2 d-flex text-${STATES[parseInt(Math.random() * 3)]}`}>
                             <FontAwesomeIcon tag="i" size="lg" fixedWidth icon={['fas', 'ethernet']}/>

@@ -2,14 +2,38 @@
 @import "~bootstrap/scss/mixins/hover";
 @import "../../scss/mixins/alarm_level";
 
-.lr-alarm-brief-chart-card {
-  color: $white;
+.lr-alarm-brief-chart {
+  &.lr-dark {
+    .lr-alarm-card.card {
+      color: $white;
+      font-weight: 100;
 
-  @each $state, $color in $theme-colors {
-    @include lr-state($state, background-color, $color);
+      @each $state, $color in $theme-colors {
+        @include lr-state($state, background-color, $color);
 
-    &.lr-#{$state} .lr-icon-circle {
-      color: mix(color-yiq($color), $color, 20%);
+        &.lr-#{$state} .lr-alarm-icon-bg {
+          color: mix(color-yiq($color), $color, 20%);
+        }
+      }
+    }
+  }
+
+  &.lr-light {
+    .lr-alarm-card.card {
+      color: $body-color;
+      border-top-width: 3px;
+
+      @each $state, $color in $theme-colors {
+        @include lr-state($state, border-top-color, $color);
+
+        &.lr-#{$state} .lr-alarm-icon-bg {
+          color: $color;
+        }
+      }
+
+      .lr-alarm-icon-state {
+        color: $white;
+      }
     }
   }
 }

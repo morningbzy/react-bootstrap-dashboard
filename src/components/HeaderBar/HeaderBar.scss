@@ -1,5 +1,8 @@
 @import "../../base";
 @import "~bootstrap/scss/mixins/transition";
+@import "~bootstrap/scss/mixins/border-radius";
+@import "../../scss/mixins/alarm_level";
+@import "../../scss/functions";
 
 #header {
   background-color: $title-bg;
@@ -13,6 +16,43 @@
   }
   .navbar-text {
     color: $color;
+  }
+
+  .lr-alarm-panel {
+    margin-right: 0;
+
+    & > .card {
+      position: relative;
+      top: .25rem;
+
+      &:first-child:before{
+        border-top-left-radius: 3px;
+      }
+      &:last-child:before {
+        border-top-right-radius: 3px;
+      }
+
+      &:before {
+        content: '';
+        position: absolute;
+        bottom: -$navbar-padding-y + .25rem;
+        left: -1rem;
+        right: -1rem;
+        height: 3px;
+        //@include border-top-radius(3px);
+      }
+
+      @each $state, $color in $theme-colors {
+        @include lr-state($state, background-color, $color) {
+          &:before {
+            //background-color: $color;
+            background-color: mix(color-yiq($title-bg), $color, 15%);
+            //box-shadow: 0 1px 5px $color;
+            //border-bottom: 1px solid $title-bg;
+          }
+        }
+      }
+    }
   }
 }
 

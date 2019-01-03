@@ -9,6 +9,7 @@ import AlarmMarquee from "../AlarmMarquee/AlarmMarquee";
 import store from '../../redux/store';
 
 import './HeaderBar.scss';
+import AlarmHeaderChartBar from "../Alarm/AlarmHeaderChart";
 
 class HeaderBar extends Component {
   constructor(props) {
@@ -28,6 +29,9 @@ class HeaderBar extends Component {
               <Nav.Link onClick={this.props.toggleRightSidebar}>
                 <FontAwesomeIcon icon={faBars}/>
               </Nav.Link>
+            </Nav>
+            <Nav>
+              <AlarmHeaderChartBar color="255,255,255" className="text-white"/>
             </Nav>
             <Navbar.Text>
               <Clock/>
