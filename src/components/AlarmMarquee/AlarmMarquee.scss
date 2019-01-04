@@ -20,7 +20,7 @@
       position: relative;
 
       @each $state, $color in $theme-colors {
-        @include lr-state($state, -color, $color) {
+        @include lr-state($state) {
           &:before {
             background-color: $color;
           }

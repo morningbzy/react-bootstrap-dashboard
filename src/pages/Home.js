@@ -11,7 +11,7 @@ class Home extends Component {
     super(props);
     this.state = {
       header: {
-        title: this.props.title,
+        title: 'Home',
       }
     };
   }

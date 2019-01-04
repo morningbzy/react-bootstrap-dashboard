@@ -9,7 +9,7 @@
       font-weight: 100;
 
       @each $state, $color in $theme-colors {
-        @include lr-state($state, background-color, $color);
+        @include lr-state-css($state, background-color, $color);
 
         &.lr-#{$state} .lr-alarm-icon-bg {
           color: mix(color-yiq($color), $color, 20%);
@@ -24,7 +24,7 @@
       border-top-width: 3px;
 
       @each $state, $color in $theme-colors {
-        @include lr-state($state, border-top-color, $color);
+        @include lr-state-css($state, border-top-color, $color);
 
         &.lr-#{$state} .lr-alarm-icon-bg {
           color: $color;

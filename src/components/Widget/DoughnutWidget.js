@@ -70,6 +70,7 @@ export default class extends Component {
       tooltip: {
         trigger: 'item',
         formatter: "{b} : {c} ({d}%)",
+        confine: true,
       },
       legend: {
         type: 'scroll',

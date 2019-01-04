@@ -1,25 +1,12 @@
 
-@mixin lr-state($state, $css, $value) {
+@mixin lr-state-css($state, $css, $value) {
   &.lr-#{$state} {
     #{$css}: #{$value};
+  }
+}
+
+@mixin lr-state($state) {
+  &.lr-#{$state} {
     @content;
   }
 }
-
-@mixin card-state($state, $css, $color) {
-  &.lr-#{$state} {
-    #{$css}: $color;
-  }
-}
-
-@mixin table-row-state($state, $css, $color) {
-  &.lr-#{$state} {
-    th,
-    td {
-      &:first-child {
-        #{$css}: $color;
-      }
-    }
-  }
-}
-

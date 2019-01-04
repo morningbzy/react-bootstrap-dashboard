@@ -4,6 +4,8 @@ import { Table } from 'react-bootstrap';
 import { STATES, API_BASE_URL } from "../../common/constants";
 import Pagination from "../Pagination/Pagination";
 
+import "./AlarmTable.scss";
+
 class AlarmTable extends Component {
   constructor(props) {
     super(props);

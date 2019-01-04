@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './AgentTree.scss';
 import { Button, FormControl, InputGroup } from "react-bootstrap";
+import { STATES } from "../../common/constants";
 
 class AgentTree extends Component {
   constructor(props) {
@@ -16,31 +17,33 @@ class AgentTree extends Component {
           title: '机房1',
           path: '/',
           icon: 'home',
+          state: 1,
           subMenu: [
-            {title: '10.0.10.1', path: '/sysmgr/user', icon: 'desktop'},
-            {title: '10.0.10.2', path: '/sysmgr/role', icon: 'laptop'},
-            {title: '10.0.10.23', path: '/sysmgr/perm', icon: 'hdd'},
+            {title: '10.0.10.1', path: '/sysmgr/user', icon: 'desktop', state: 0,},
+            {title: '10.0.10.2', path: '/sysmgr/role', icon: 'laptop', state: 0,},
+            {title: '10.0.10.23', path: '/sysmgr/perm', icon: 'hdd', state: 1,},
           ],
         },
         {
           title: '机房2',
           path: '/dashboard',
           icon: 'tachometer-alt',
+          state: 0,
           subMenu: [
-            {title: '10.0.10.1', path: '/sysmgr/user', icon: ['fab', 'linux']},
-            {title: '10.0.10.2', path: '/sysmgr/role', icon: ['fab', 'ubuntu']},
-            {title: '10.0.10.23', path: '/sysmgr/perm', icon: ['fab', 'windows']},
+            {title: '10.0.10.1', path: '/sysmgr/user', icon: ['fab', 'linux'], state: 0,},
+            {title: '10.0.10.2', path: '/sysmgr/role', icon: ['fab', 'ubuntu'], state: 0,},
+            {title: '10.0.10.23', path: '/sysmgr/perm', icon: ['fab', 'windows'], state: 0,},
           ],
         },
         {
           title: '万豪机房',
           path: '/agent',
           icon: 'server',
-          exact: false,
+          state: 1,
           subMenu: [
-            {title: '10.0.10.1', path: '/sysmgr/user', icon: 'hdd'},
-            {title: '10.0.10.2', path: '/sysmgr/role', icon: 'hdd'},
-            {title: '10.0.10.23', path: '/sysmgr/perm', icon: 'hdd'},
+            {title: '10.0.10.1', path: '/sysmgr/user', icon: 'hdd', state: 1,},
+            {title: '10.0.10.2', path: '/sysmgr/role', icon: 'hdd', state: 1,},
+            {title: '10.0.10.23', path: '/sysmgr/perm', icon: 'hdd', state: 1,},
           ],
         },
         {
@@ -48,17 +51,18 @@ class AgentTree extends Component {
           path: '/topo',
           icon: 'network-wired',
           exact: false,
+          state: 2,
           subMenu: [
             {
-              title: '10.0.10.1', path: '/sysmgr/user', icon: 'hdd',
+              title: '10.0.10.1', path: '/sysmgr/user', icon: 'hdd', state: 2,
               subMenu: [
-                {title: '10.0.10.1', path: '/sysmgr/user', icon: 'hdd'},
-                {title: '10.0.10.2', path: '/sysmgr/role', icon: 'hdd'},
-                {title: '10.0.10.23', path: '/sysmgr/perm', icon: 'hdd'},
+                {title: '10.0.10.1', path: '/sysmgr/user', icon: 'hdd', state: 1,},
+                {title: '10.0.10.2', path: '/sysmgr/role', icon: 'hdd', state: 2,},
+                {title: '10.0.10.23', path: '/sysmgr/perm', icon: 'hdd', state: 1,},
               ],
             },
-            {title: '10.0.10.2', path: '/sysmgr/role', icon: 'desktop'},
-            {title: '10.0.10.23', path: '/sysmgr/perm', icon: 'hdd'},
+            {title: '10.0.10.2', path: '/sysmgr/role', icon: 'desktop', state: 1,},
+            {title: '10.0.10.23', path: '/sysmgr/perm', icon: 'hdd', state: 1,},
           ],
         },
       ],
@@ -68,15 +72,15 @@ class AgentTree extends Component {
   icon = (m) => {
     if (!m.icon) return null;
 
-    const icon = <FontAwesomeIcon tag="i" fixedWidth icon={m.icon}/>;
+    const icon = <FontAwesomeIcon tag="i" fixedWidth icon={m.icon} className="lr-icon"/>;
 
     if (m.subscript) {
       return (
         <i className="fa-layers fa-fw">
           {icon}
-          <FontAwesomeIcon tag="i" fixedWidth icon='circle' className="subscript"
+          <FontAwesomeIcon tag="i" fixedWidth icon='circle' className="subscript lr-icon"
                            transform="shrink-3 down-4 right-5.5"/>
-          <FontAwesomeIcon tag="i" fixedWidth icon={m.subscript}
+          <FontAwesomeIcon tag="i" fixedWidth icon={m.subscript} className="lr-icon"
                            transform="shrink-4 down-4 right-5.5"/>
         </i>
       );
@@ -90,12 +94,12 @@ class AgentTree extends Component {
       return (
         m.subMenu ? (
           <li key={i}>
-            <span onClick={this.toggleExpend}>{this.icon(m)} {m.title} </span>
+            <span onClick={this.toggleExpend} className={`lr-${STATES[m.state]}`}>{this.icon(m)} {m.title} </span>
             <ul style={{display: 'none'}}>{this.renderMenu(m.subMenu)}</ul>
           </li>
         ) : (
           <li key={i} className="leaf">
-            <span>{this.icon(m)} {m.title}</span>
+            <span className={`lr-${STATES[m.state]}`}>{this.icon(m)} {m.title}</span>
           </li>
         )
       );

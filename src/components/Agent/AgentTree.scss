@@ -1,13 +1,16 @@
 @import "../../base";
 @import "~bootstrap/scss/mixins/transition";
+@import "~bootstrap/scss/mixins/hover";
 @import "../../scss/functions";
+@import "../../scss/mixins/alarm_level";
 
 $agent-tree-width: $right-sidebar-width;
 
 .agent-tree-wrapper {
-  width: $agent-tree-width - px-to-rem(15px);
-  padding-left: 15px;
-  padding-top: 15px;
+  width: $agent-tree-width;
+  padding: 15px;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .agent-tree-nav {
@@ -21,51 +24,49 @@ $agent-tree-width: $right-sidebar-width;
 
   $indent: 1em;
   $indicator-left: .3em;
-  $indicator-leaf-left: .1em;
+  $indicator-leaf-left: .15em;
   $indicator-expended-left: 0;
 
   li {
     text-indent: $indent;
     line-height: 2em;
-    &:before {
-    }
 
     li {
       text-indent: $indent * 2;
-      &:before {
+      > span:before {
         left: $indicator-left + $indent !important;
       }
-      &.leaf:before {
+      &.leaf > span:before {
         left: $indicator-leaf-left + $indent !important;
       }
-      &.root:before,
-      &.expended:before {
+      &.root > span:before,
+      &.expended > span:before {
         left: $indicator-expended-left + $indent !important;
       }
 
       li {
         text-indent: $indent * 3;
-        &:before {
+        > span:before {
           left: $indicator-left + $indent * 2 !important;
         }
-        &.leaf:before {
+        &.leaf > span:before {
           left: $indicator-leaf-left + $indent * 2 !important;
         }
-        &.root:before,
-        &.expended:before {
+        &.root > span:before,
+        &.expended > span:before {
           left: $indicator-expended-left + $indent * 2 !important;
         }
 
         li {
           text-indent: $indent * 4;
-          &:before {
+          > span:before {
             left: $indicator-left + $indent * 3 !important;
           }
-          &.leaf:before {
+          &.leaf > span:before {
             left: $indicator-leaf-left + $indent * 3 !important;
           }
-          &.root:before,
-          &.expended:before {
+          &.root > span:before,
+          &.expended > span:before {
             left: $indicator-expended-left + $indent * 3 !important;
           }
         }
@@ -77,19 +78,40 @@ $agent-tree-width: $right-sidebar-width;
     span,
     a {
       display: block;
+      cursor: pointer;
+      color: $dropdown-link-color;
+
+      @each $state, $color in $theme-colors {
+        @include lr-state($state) {
+          .lr-icon {
+            color: $color;
+          }
+
+          &:hover {
+            .lr-icon {
+              color: darken($color, 5%);
+            }
+          }
+        }
+      }
     }
 
-    &:not(.leaf) {
+    &:not(.root):not(.leaf) {
       > span,
       > a {
         cursor: pointer;
+
+        @include hover-focus-active {
+          background-color: $gray-200;
+          color: $dropdown-link-hover-color;
+        }
       }
     }
   }
 
   li {
     position: relative;
-    &:before {
+    > span:before {
       content: '';
       position: absolute;
       top: 1em - .3em;
@@ -102,7 +124,7 @@ $agent-tree-width: $right-sidebar-width;
       border-left: .3em solid gray;
       border-right: 0;
     }
-    &.leaf:before {
+    &.leaf > span:before {
       left: $indicator-leaf-left;
       top: 1em - .15em;
       height: .4em;
@@ -110,8 +132,8 @@ $agent-tree-width: $right-sidebar-width;
       border: 2px solid gray;
       border-radius: .2em;
     }
-    &.root:before,
-    &.expended:before {
+    &.root > span:before,
+    &.expended > span:before {
       top: 1em - .15em;
       left: $indicator-expended-left;
       border-top: .3em solid gray;

@@ -84,7 +84,9 @@ export default class extends Component {
   getOption() {
     return {
       title: {text: 'Example',},
-      tooltip: {},
+      tooltip: {
+        confine: true,
+      },
       xAxis: {
         data: DATES,
       },

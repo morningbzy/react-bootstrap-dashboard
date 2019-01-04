@@ -5,6 +5,7 @@
 // Override default CSS
 table {
   font-size: .8rem;
+
   td, th {
     vertical-align: middle !important;
   }
@@ -35,7 +36,7 @@ table {
     @include hover-focus {
       border-top-color: transparentize($primary, .75);
       @each $state, $color in $theme-colors {
-        @include lr-state($state, border-top-color, transparentize($color, .75));
+        @include lr-state-css($state, border-top-color, transparentize($color, .75));
       }
     }
 
@@ -48,7 +49,7 @@ table {
   .nav-item.show .nav-link {
     border-top-color: $primary;
     @each $state, $color in $theme-colors {
-      @include lr-state($state, border-top-color, $color);
+      @include lr-state-css($state, border-top-color, $color);
     }
   }
 }
@@ -139,28 +140,25 @@ table {
 
   .lr-alarm-panel {
     margin-right: -.625rem;
-    margin-top: 3px;
+    margin-top: 2px;
 
     & > .card {
       position: relative;
       margin-left: .5rem;
       margin-right: .5rem;
 
-      &:first-child:before {
-        border-top-left-radius: 2px;
-      }
-
       &:before {
         content: '';
         position: absolute;
-        bottom: -2px;
+        bottom: -3px;
         left: -.5rem;
         right: -.5rem;
         height: 2px;
       }
 
       @each $state, $color in $theme-colors {
-        @include lr-state($state, color, $color) {
+        @include lr-state($state) {
+          color: $color;
           &:before {
             background-color: $color;
           }
@@ -233,7 +231,7 @@ table {
   }
 
   @each $color, $value in $theme-colors {
-    @include card-state($color, border-top-color, theme-color($color));
+    @include lr-state-css($color, border-top-color, theme-color($color));
   }
 
   .card-body {
@@ -341,28 +339,6 @@ table {
         }
       }
     }
-  }
-}
-
-// Alarm
-.lr-alarm-table {
-  font-size: .8rem;
-
-  tr {
-    th,
-    td {
-      &:first-child {
-        border-left-width: 0;
-        border-left-style: solid;
-        border-left-color: transparent;
-      }
-    }
-
-    //&:hover {
-    //  @each $state, $color in $theme-colors {
-    //    @include table-row-state($state, border-left-color, $color);
-    //  }
-    //}
   }
 }
 

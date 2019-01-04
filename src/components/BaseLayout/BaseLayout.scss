@@ -1,5 +1,7 @@
 @import "../../base";
 @import "~bootstrap/scss/mixins/transition";
+@import "~bootstrap/scss/mixins/hover";
+@import "~bootstrap/scss/mixins/border-radius";
 
 $sidebar-width: 200px;
 $sidebar-bg: darken($dark, 10%);
@@ -9,10 +11,11 @@ $sidebar-bg: darken($dark, 10%);
 }
 
 #wrapper {
+  position: relative;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  //@include transition(all 0.3s ease);
+  overflow-x: hidden;
 }
 
 .sidebar-collapsed {
@@ -22,21 +25,110 @@ $sidebar-bg: darken($dark, 10%);
 }
 
 #container-wrapper {
-  //overflow-x: hidden;
   padding-top: $lr-alarm-marquee-height;
 }
 
 #right-sidebar-wrapper {
+  position: relative;
   width: $right-sidebar-width;
-  overflow: auto;
+  //overflow-y: auto;
   flex-shrink: 0;
   background-color: $light;
   padding-top: 1.75rem;
   @include transition(all 0.3s cubic-bezier(.645, .045, .355, 1));
+  border-left: 1px solid $gray-200;
+
+  .lr-out {
+    opacity: 0;
+    width: 14px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -14px;
+    @include transition(all .3s ease-in-out);
+
+    .lr-border {
+      position: absolute;
+      right: 0;
+      width: 1px;
+      height: 100%;
+      background: $gray-400;
+      @include transition(all .3s ease-in-out);
+    }
+
+    .lr-toggle-btn {
+      width: 14px;
+      height: 2rem;
+      position: fixed;
+      top: 50vh;
+      background: $gray-400;
+      color: white;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      @include transition(all .3s ease-in-out);
+      @include border-left-radius(.2rem);
+
+      &:before, &:after {
+        content: '';
+        position: relative;
+        width: 2px;
+        height: 8px;
+        background: $white;
+        @include transition(all .3s ease-in-out);
+      }
+      &:before {
+        bottom: -1px;
+      }
+      &:after {
+        top: -1px;
+      }
+    }
+
+    &:hover {
+      .lr-border {
+        width: 2px;
+        background: $primary;
+      }
+
+      .lr-toggle-btn {
+        background: $primary;
+
+        &:before {
+          transform: rotate(-30deg);
+        }
+        &:after {
+          transform: rotate(30deg);
+        }
+      }
+    }
+  }
+
+  @include hover {
+    .lr-out {
+      opacity: 1;
+    }
+  }
 }
 
 .right-sidebar-collapsed {
   #right-sidebar-wrapper {
     width: 0;
+    .lr-out {
+      opacity: 1;
+
+      &:hover {
+        .lr-toggle-btn {
+          &:before {
+            transform: rotate(30deg);
+          }
+          &:after {
+            transform: rotate(-30deg);
+          }
+        }
+      }
+    }
   }
 }

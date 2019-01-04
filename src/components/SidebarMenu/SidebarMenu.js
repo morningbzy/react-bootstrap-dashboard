@@ -88,9 +88,9 @@ class SidebarMenu extends Component {
       const {exact = true} = m;
       return (
         m.subMenu ? (
-          <li key={i}>
+          <li key={i} className="expended">
             <span onClick={this.toggleExpend}>{this.icon(m)} {m.title} </span>
-            <ul style={{display: 'none'}}>{this.renderMenu(m.subMenu)}</ul>
+            <ul style={{display: 'block'}}>{this.renderMenu(m.subMenu)}</ul>
           </li>
         ) : (
           <li key={i} className="leaf">

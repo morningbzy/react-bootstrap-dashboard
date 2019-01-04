@@ -26,6 +26,7 @@ export default class extends Component {
       tooltip: {
         trigger: 'axis',
         axisPointer: {type: 'shadow',},
+        confine: true,
       },
       legend: {
         data: ['严重', '错误', '警告', '通知',],

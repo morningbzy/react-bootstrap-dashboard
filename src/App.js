@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import BaseLayout from "./components/BaseLayout/BaseLayout";
-import {BrowserRouter} from "react-router-dom";
-import {library} from "@fortawesome/fontawesome-svg-core";
+import { BrowserRouter } from "react-router-dom";
+import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   fas,
   faHome,
@@ -29,6 +29,7 @@ import {
   faLaptop,
   faExclamation,
   faTimes,
+  faThumbtack,
 } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -45,7 +46,6 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 import './App.scss';
-import $ from 'jquery';
 
 library.add(
   // regular
@@ -67,22 +67,10 @@ class App extends Component {
     }
   }
 
-  toggleSidebar = () => {
-    $('body').toggleClass('sidebar-collapsed');
-    // this.setState({toggled: !this.state.toggled});
-  };
-
-  toggleRightSidebar = () => {
-    $('body').toggleClass('right-sidebar-collapsed');
-    // this.setState({toggled: !this.state.toggled});
-  };
-
   render() {
     return (
       <BrowserRouter>
-        <BaseLayout toggled={this.state.toggled}
-                    toggleSidebar={this.toggleSidebar}
-                    toggleRightSidebar={this.toggleRightSidebar}/>
+        <BaseLayout/>
       </BrowserRouter>
     );
   }

@@ -43,7 +43,8 @@
       }
 
       @each $state, $color in $theme-colors {
-        @include lr-state($state, background-color, $color) {
+        @include lr-state($state) {
+          background-color: $color;
           &:before {
             //background-color: $color;
             background-color: mix(color-yiq($title-bg), $color, 15%);

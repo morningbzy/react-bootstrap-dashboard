@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, ButtonGroup, ButtonToolbar, Card, CardDeck, CardGroup, Nav, Tab, Tabs } from 'react-bootstrap';
+import { Button, ButtonGroup, ButtonToolbar, Card, CardDeck, Nav, Tab } from 'react-bootstrap';
 
 import ScrollSpy from "../components/ScrollSpy";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome/index.es";
@@ -33,29 +33,49 @@ class Agent extends Component {
           <Card.Body className="agent-content">
             <ButtonToolbar>
               <ButtonGroup size="sm" className="mb-2">
-                <Button variant="outline-dark"><FontAwesomeIcon tag="i" fixedWidth
-                                                                icon={['far', 'file-alt']}/>设备端口性能</Button>
-                <Button variant="outline-dark"><FontAwesomeIcon tag="i" fixedWidth
-                                                                icon={['fas', 'cog']}/>设置Web配置</Button>
-                <Button variant="outline-dark"><FontAwesomeIcon tag="i" fixedWidth icon={['fas', 'cog']}/>端口配置</Button>
-                <Button variant="outline-dark"><FontAwesomeIcon tag="i" fixedWidth icon={['fas', 'cog']}/>基本配置</Button>
-                <Button variant="outline-dark"><FontAwesomeIcon tag="i" fixedWidth icon={['fas', 'cog']}/>SFP配置</Button>
-                <Button variant="outline-dark"><FontAwesomeIcon tag="i" fixedWidth icon={['far', 'calendar-alt']}/>LLDP表格</Button>
-                <Button variant="outline-dark"><FontAwesomeIcon tag="i" fixedWidth icon={['far', 'calendar-alt']}/>SFP表格</Button>
-                <Button variant="outline-dark"><FontAwesomeIcon tag="i" fixedWidth icon={['far', 'file-alt']}/>Turbo
-                  Ring信息</Button>
+                <Button variant="outline-dark">
+                  <FontAwesomeIcon tag="i" fixedWidth icon={['far', 'file-alt']}/>设备端口性能
+                </Button>
+                <Button variant="outline-dark">
+                  <FontAwesomeIcon tag="i" fixedWidth icon={['fas', 'cog']}/>设置Web配置
+                </Button>
+                <Button variant="outline-dark">
+                  <FontAwesomeIcon tag="i" fixedWidth icon={['fas', 'cog']}/>端口配置
+                </Button>
+                <Button variant="outline-dark">
+                  <FontAwesomeIcon tag="i" fixedWidth icon={['fas', 'cog']}/>基本配置
+                </Button>
+                <Button variant="outline-dark">
+                  <FontAwesomeIcon tag="i" fixedWidth icon={['fas', 'cog']}/>SFP配置
+                </Button>
+                <Button variant="outline-dark">
+                  <FontAwesomeIcon tag="i" fixedWidth icon={['far', 'calendar-alt']}/>LLDP表格
+                </Button>
+                <Button variant="outline-dark">
+                  <FontAwesomeIcon tag="i" fixedWidth icon={['far', 'calendar-alt']}/>SFP表格
+                </Button>
+                <Button variant="outline-dark">
+                  <FontAwesomeIcon tag="i" fixedWidth icon={['far', 'file-alt']}/>Turbo Ring信息
+                </Button>
               </ButtonGroup>
+            </ButtonToolbar>
+            <ButtonToolbar>
               <ButtonGroup size="sm" className="mb-2">
-                <Button variant="outline-dark"><FontAwesomeIcon tag="i" fixedWidth
-                                                                icon={['far', 'file-alt']}/>基本信息</Button>
-                <Button variant="outline-dark"><FontAwesomeIcon tag="i" fixedWidth
-                                                                icon={['far', 'file-alt']}/>电源信息</Button>
-                <Button variant="outline-dark"><FontAwesomeIcon tag="i" fixedWidth icon={['far', 'file-alt']}/>Trunk
-                  Ports信息</Button>
-                <Button variant="outline-dark"><FontAwesomeIcon tag="i" fixedWidth icon={['far', 'file-alt']}/>VLAN
-                  Static信息</Button>
-                <Button variant="outline-dark"><FontAwesomeIcon tag="i" fixedWidth icon={['far', 'file-alt']}/>Trap
-                  Rcv信息</Button>
+                <Button variant="outline-dark">
+                  <FontAwesomeIcon tag="i" fixedWidth icon={['far', 'file-alt']}/>基本信息
+                </Button>
+                <Button variant="outline-dark">
+                  <FontAwesomeIcon tag="i" fixedWidth icon={['far', 'file-alt']}/>电源信息
+                </Button>
+                <Button variant="outline-dark">
+                  <FontAwesomeIcon tag="i" fixedWidth icon={['far', 'file-alt']}/>Trunk Ports信息
+                </Button>
+                <Button variant="outline-dark">
+                  <FontAwesomeIcon tag="i" fixedWidth icon={['far', 'file-alt']}/>VLAN Static信息
+                </Button>
+                <Button variant="outline-dark">
+                  <FontAwesomeIcon tag="i" fixedWidth icon={['far', 'file-alt']}/>Trap Rcv信息
+                </Button>
               </ButtonGroup>
             </ButtonToolbar>
             <div className="d-flex flex-row">
@@ -73,7 +93,8 @@ class Agent extends Component {
                           <Card.Body className="px-1 py-0 text-center">
                             <small>{i}</small>
                           </Card.Body>
-                        </Card>))
+                        </Card>
+                      ))
                     }
                   </Card.Body>
                 </Card>

@@ -1,0 +1,57 @@
+@import "../../base";
+@import "~bootstrap/scss/mixins/hover";
+@import "~bootstrap/scss/mixins/transition";
+@import "../../scss/mixins/alarm_level";
+
+.lr-alarm-table {
+  tr {
+    @include transition(all 0.15s ease-in-out);
+
+    @each $state, $color in $theme-colors {
+      @include lr-state($state) {
+        //$indicator-background: theme-color-level($state, -4);
+        //$hover-indicator-background: $color;
+        $background: theme-color-level($state, -10);
+        //$hover-background: theme-color-level($state, -8);
+        $hover-background: darken(theme-color-level($state, -9), 5%);
+
+        background-color: $background;
+
+        th, td {
+          //border-top: none;
+          border-top: 1px solid $hover-background;
+
+          //&:first-child {
+          //  position: relative;
+          //
+          //  &:before {
+          //    //content: '';
+          //    position: absolute;
+          //    //top: -1px;
+          //    top: 0;
+          //    left: 0;
+          //    bottom: 0;
+          //    width: 3px;
+          //    background-color: $indicator-background;
+          //    @include transition(background-color 0.15s ease-in-out);
+          //  }
+          //}
+        }
+
+        @include hover {
+          background-color: $hover-background;
+          //background-color: $color;
+          //color: $white;
+
+          //th,
+          //td {
+          //  &:first-child:before {
+          //    background-color: $hover-indicator-background;
+          //  }
+          //}
+        }
+
+      }
+    }
+  }
+}

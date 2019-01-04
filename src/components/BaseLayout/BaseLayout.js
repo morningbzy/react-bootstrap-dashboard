@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row } from 'react-bootstrap';
+import $ from 'jquery';
 
-import './BaseLayout.scss';
 import SidebarMenu from "../SidebarMenu/SidebarMenu";
 import HeaderBar from "../HeaderBar/HeaderBar";
 import { Home, Dashboard, Agent, AgentSpec, Alarm, AlarmHistory, UserMgr, RoleMgr, PermMgr, Signin } from "../../pages";
@@ -11,10 +11,16 @@ import store from '../../redux/store';
 import { signOut } from "../../redux/actions/signin-action";
 import AgentTree from "../Agent/AgentTree";
 
+import './BaseLayout.scss';
+
 class BaseLayout extends Component {
   handleSignOut = () => {
     store.dispatch(signOut());
     this.setState({});
+  };
+
+  toggleRightSidebar = () => {
+    $('body').toggleClass('right-sidebar-collapsed');
   };
 
   render() {
@@ -23,15 +29,12 @@ class BaseLayout extends Component {
         <Route path="/login" exact component={(props) => (<Signin  {...props}/>)}/>
         <Route>
           <>
-            <HeaderBar toggleSidebar={this.props.toggleSidebar}
-                       toggleRightSidebar={this.props.toggleRightSidebar}
-                       handleSignout={this.handleSignOut}/>
+            <HeaderBar handleSignout={this.handleSignOut}/>
             <Container fluid id="wrapper">
               <Row className="flex-grow-1 flex-nowrap">
                 <SidebarMenu/>
                 <Switch>
-                  <AuthRoute path="/" exact
-                             component={(props) => (<Home title="Home" {...props}/>)}/>
+                  <AuthRoute path="/" exact component={Home}/>
                   <AuthRoute path="/dashboard" exact
                              component={(props) => (<Dashboard title="Dashboard" {...props}/>)}/>
                   <AuthRoute path="/agent/:id" exact
@@ -52,6 +55,10 @@ class BaseLayout extends Component {
                 </Switch>
                 <div id="right-sidebar-wrapper">
                   <AgentTree/>
+                  <div className="lr-out">
+                    <i className="lr-toggle-btn" onClick={this.toggleRightSidebar}/>
+                    <i className="lr-border"/>
+                  </div>
                 </div>
               </Row>
             </Container>

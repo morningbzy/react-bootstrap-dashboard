@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import store from '../../redux/store';
+import $ from 'jquery';
 
 import Clock from "../Clock/Clock";
 import AlarmMarquee from "../AlarmMarquee/AlarmMarquee";
-
-import store from '../../redux/store';
 
 import './HeaderBar.scss';
 import AlarmHeaderChartBar from "../Alarm/AlarmHeaderChart";
@@ -16,6 +15,14 @@ class HeaderBar extends Component {
     super(props);
   }
 
+  toggleSidebar = () => {
+    $('body').toggleClass('sidebar-collapsed');
+  };
+
+  toggleRightSidebar = () => {
+    $('body').toggleClass('right-sidebar-collapsed');
+  };
+
   render() {
     const username = store.getState().auth.username;
     return (
@@ -23,11 +30,8 @@ class HeaderBar extends Component {
         <Navbar id="header" sticky="top">
           <Navbar.Collapse>
             <Nav className="mr-auto">
-              <Nav.Link onClick={this.props.toggleSidebar}>
-                <FontAwesomeIcon icon={faBars}/>
-              </Nav.Link>
-              <Nav.Link onClick={this.props.toggleRightSidebar}>
-                <FontAwesomeIcon icon={faBars}/>
+              <Nav.Link onClick={this.toggleSidebar}>
+                <FontAwesomeIcon icon={['fas', 'bars']}/>
               </Nav.Link>
             </Nav>
             <Nav>
