@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import { Card, Form, Nav, Button, Row, Col, Overlay } from 'react-bootstrap';
+import { Card, Form, Button, Overlay, DropdownButton, Dropdown } from 'react-bootstrap';
 import DateRangePicker from 'react-bootstrap-daterangepicker';
+import $ from 'jquery';
 
 import * as yup from 'yup';
 import AlarmTable from "../components/Alarm/AlarmTable";
 import { Form as FormikForm, Formik } from "formik";
 import 'react-datetime/css/react-datetime.css';
 import 'bootstrap-daterangepicker/daterangepicker.css';
-import { LinkContainer } from "react-router-bootstrap";
 import AlarmBriefChartBar from "../components/Alarm/AlarmBriefChart";
 import PageHeader from "../components/PageHeader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome/index.es";
 
 
 class AlarmHistory extends Component {
@@ -72,56 +73,69 @@ class AlarmHistory extends Component {
                   // handleBlur,
                   // handleSubmit,
                 } = props;
+                console.log(handleChange);
                 return (
-                  <FormikForm>
-                    <Form.Group as={Row}>
-                      <Form.Label column sm="1" className="col-form-label-sm">label</Form.Label>
-                      <Col sm="3">
-                        <Form.Control type="text" size="sm"
-                                      name="showMe"
-                                      value={values.showMe}
-                                      onChange={handleChange}
+                  <FormikForm className="form-inline card-header-form">
+                    <Form.Group>
+                      <DropdownButton size="sm"
+                                      name="alarmLevel"
+                                      value={values.alarmLevel}
+                                      title={`Filter: ${values.alarmLevel}`}
+                                      variant="outline-input"
+                                      onClick={(e) => {
+                                        console.log($(e.target).attr('value'));
+                                      }}
                                       isInvalid={!!errors.showMe}
+                                      ref={this.attachRef}>
+                        <Dropdown.Item value="info">Info</Dropdown.Item>
+                        <Dropdown.Item value="warn" >Warn</Dropdown.Item>
+                        <Dropdown.Divider/>
+                        <Dropdown.Item value="error">Error</Dropdown.Item>
+                      </DropdownButton>
+                      <Overlay target={target} show={!!errors.showMe} placement="auto-start">
+                        {props => (
+                          <div className="text-danger small" style={{...props.style,}} {...props}>
+                            {errors.showMe}
+                          </div>
+                        )}
+                      </Overlay>
+                    </Form.Group>
+                    <Form.Group>
+                      <Form.Label>Keyword</Form.Label>
+                      <Form.Control type="text" size="sm"
+                                    name="showMe"
+                                    value={values.showMe}
+                                    onChange={handleChange}
+                                    isInvalid={!!errors.showMe}
+                                    ref={this.attachRef}/>
+                      <Overlay target={target} show={!!errors.showMe} placement="auto-start">
+                        {props => (
+                          <div className="text-danger small" style={{...props.style,}} {...props}>
+                            {errors.showMe}
+                          </div>
+                        )}
+                      </Overlay>
+                    </Form.Group>
+                    <Form.Group>
+                      <Form.Label>Date Between</Form.Label>
+                      <DateRangePicker autoApply
+                                       onApply={(event, picker) => {
+                                         const data = this.state.data;
+                                         data.startDate = picker.startDate.format('YYYY-MM-DD');
+                                         data.endDate = picker.endDate.format('YYYY-MM-DD');
+                                         this.setState({data});
+                                       }}>
+                        <Form.Control type="text" size="sm"
+                                      name="dateRange"
+                                      onChange={handleChange}
+                                      value={`${values.startDate} ~ ${values.endDate}`}
                                       ref={this.attachRef}/>
-                        <Overlay target={target} show={!!errors.showMe} placement="auto-start">
-                          {props => (
-                            <div className="text-danger small" style={{...props.style,}} {...props}>
-                              {errors.showMe}
-                            </div>
-                          )}
-                        </Overlay>
-                      </Col>
-                      <Form.Label column sm="1" className="col-form-label-sm">label</Form.Label>
-                      <Col sm="6">
-                        <DateRangePicker autoApply
-                                         onApply={(event, picker) => {
-                                           const data = this.state.data;
-                                           data.startDate = picker.startDate.format('YYYY-MM-DD');
-                                           data.endDate = picker.endDate.format('YYYY-MM-DD');
-                                           this.setState({data});
-                                         }}>
-                          <Row>
-                            <Col sm="5">
-                              <Form.Control type="text" size="sm"
-                                            name="dateRange"
-                                            onChange={handleChange}
-                                            value={values.startDate}
-                                            ref={this.attachRef}/>
-                            </Col>
-                            <Form.Label column sm="1">~</Form.Label>
-                            <Col sm="5">
-                              <Form.Control type="text" size="sm"
-                                            name="dateRange"
-                                            onChange={handleChange}
-                                            value={values.endDate}
-                                            ref={this.attachRef}/>
-                            </Col>
-                          </Row>
-                        </DateRangePicker>
-                      </Col>
-                      <Col sm="1">
-                        <Button type="submit" size="sm">Sub</Button>
-                      </Col>
+                      </DateRangePicker>
+                    </Form.Group>
+                    <Form.Group>
+                      <Button type="submit" size="sm">
+                        <FontAwesomeIcon icon={['fas', 'search']} fixedWidth/> Search
+                      </Button>
                     </Form.Group>
                   </FormikForm>
                 );

@@ -101,7 +101,7 @@ $sidebar-dark-indicator-active-color: $sidebar-dark-active-bg;
     }
   }
 
-  $indent: 1.5rem;
+  $indent: $sidebar-width / 10;
 
   li {
     text-indent: $indent;

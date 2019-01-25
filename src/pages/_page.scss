@@ -1,4 +1,5 @@
 @import "../base";
+@import "~bootstrap/scss/mixins/forms";
 @import "../scss/functions";
 @import "../scss/mixins/alarm_level";
 
@@ -118,6 +119,9 @@ table {
 
 .react-bootstrap-daterangepicker-container {
   width: 100%;
+  .form-control {
+    text-align: center;
+  }
 }
 
 .badge.perm {
@@ -131,6 +135,19 @@ table {
   &.badge-dark {
     @extend .text-dark;
     border-color: $dark;
+  }
+}
+
+.btn-outline-input {
+  color: $input-color;
+  background-color: $input-bg;
+  background-clip: padding-box;
+  border: $input-border-width solid $input-border-color;
+
+  @include form-control-focus();
+
+  @include hover {
+    background-color: $input-border-color;
   }
 }
 
@@ -360,6 +377,36 @@ table {
 
     .tab-pane {
       padding: $card-spacer-y $card-spacer-x;
+    }
+  }
+}
+
+// Card
+.card {
+  .card-header-form {
+    margin-top: 1rem - $card-spacer-x;
+    margin-bottom: 1rem;
+
+    &.highlight {
+      margin: (-$card-spacer-x) (-$card-spacer-x) $card-spacer-x;
+      padding: 1rem $card-spacer-x;
+      background: $light;
+      border-bottom: $card-border-width solid $card-border-color;
+    }
+
+    .form-group {
+      margin-right: 1rem;
+
+      .form-label {
+        margin-right: .5rem;
+      }
+
+      .react-bootstrap-daterangepicker-container {
+        width: 12rem;
+        .form-control {
+          width: 100%;
+        }
+      }
     }
   }
 }

@@ -119,8 +119,8 @@ class AgentTree extends Component {
           <InputGroup size="sm">
             <FormControl placeholder="Search..."/>
             <InputGroup.Append>
-              <Button variant="outline-secondary"><FontAwesomeIcon icon="search"/></Button>
-              <Button variant="outline-secondary"><FontAwesomeIcon icon="redo"/></Button>
+              <Button variant="outline-input"><FontAwesomeIcon icon="search"/></Button>
+              <Button variant="outline-input"><FontAwesomeIcon icon="redo"/></Button>
             </InputGroup.Append>
           </InputGroup>
         </div>

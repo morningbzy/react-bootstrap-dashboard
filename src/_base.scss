@@ -55,5 +55,9 @@ $link-color: $gray-700 !default;
 $link-hover-decoration: none !default;
 $link-hover-color: darken($link-color, 20%) !default;
 
+$btn-box-shadow: 0 0 0 0 !default; // inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075) !default;
+$btn-active-box-shadow: 0 0 0 0 !default; // inset 0 3px 5px rgba($black, .125) !default;
+$input-box-shadow: 0 0 0 0 !default; // inset 0 1px 1px rgba($black, .075) !default;
+
 @import "~bootstrap/scss/variables";
 @import "scss/variables";
